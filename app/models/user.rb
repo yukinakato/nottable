@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :validatable
   # :omniauthable
 
-  validates :display_name, presence: true, length: { maximum: 50 }
-  validates :introduce, length: { maximum: 100 }
+  validates :display_name, presence: true, length: { maximum: Constants::USER_DISPLAY_NAME_MAX_LENGTH }
+  validates :introduce, length: { maximum: Constants::USER_INTRODUCE_MAX_LENGTH }
 end

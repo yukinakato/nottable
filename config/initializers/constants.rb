@@ -1,5 +1,11 @@
 module Constants
   SITE_NAME = "Nottable".freeze
+
+  USER_DISPLAY_NAME_MAX_LENGTH = 50
+  USER_INTRODUCE_MAX_LENGTH = 100
+
+  NOTE_TITLE_MAX_LENGTH = 50
+  NOTE_CONTENT_MAX_LENGTH = 1000
 end
 
 Constants.freeze
