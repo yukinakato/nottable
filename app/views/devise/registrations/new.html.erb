@@ -4,7 +4,7 @@
   <div class="col-md-6 offset-md-3">
     <h2>ユーザー登録</h2>
     <%= form_with(model: @user, url: user_registration_path, local: true) do |f| %>
-      <%#= render "shared/error_messages", object: f.object %>
+      <%= render "shared/object_error", object: f.object %>
 
       <%= f.label :ニックネーム %>
       <%= f.text_field :display_name, class: 'form-control' %>
