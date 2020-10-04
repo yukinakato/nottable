@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_04_062411) do
+ActiveRecord::Schema.define(version: 2020_10_04_085540) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2020_10_04_062411) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bookmarks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["note_id"], name: "index_bookmarks_on_note_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "markdown_notes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
@@ -53,12 +62,33 @@ ActiveRecord::Schema.define(version: 2020_10_04_062411) do
     t.bigint "user_id", null: false
     t.string "title", default: "", null: false
     t.boolean "private", default: false, null: false
-    t.string "entity_type"
-    t.bigint "entity_id"
+    t.string "note_entity_type"
+    t.bigint "note_entity_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["entity_type", "entity_id"], name: "index_notes_on_entity_type_and_entity_id"
+    t.index ["note_entity_type", "note_entity_id"], name: "index_notes_on_note_entity_type_and_note_entity_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "unread", default: true, null: false
+    t.string "notify_entity_type"
+    t.bigint "notify_entity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notify_entity_type", "notify_entity_id"], name: "index_notifications_on_notify_entity_type_and_notify_entity_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "rich_notes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
@@ -76,9 +106,13 @@ ActiveRecord::Schema.define(version: 2020_10_04_062411) do
     t.string "introduce"
     t.string "provider"
     t.string "uid"
+    t.index ["display_name"], name: "index_users_on_display_name"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "notes"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "notes", "users"
+  add_foreign_key "notifications", "users"
 end
