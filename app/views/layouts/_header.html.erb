@@ -5,8 +5,25 @@
     </div>
     <ul class="navbar-nav navbar-right">
       <% if user_signed_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.display_name %><b class="caret"></b></a>
+        <div class="navbar-form navbar-left">
+          <%#= form_with url: search_path, method: :post, local: true do |f| %>
+            <%#= f.search_field :searchkey, class: "form-control", placeholder: "検索(例: 酒、猫、花)", required: true %>
+          <%# end %>
+        </div>
+
+        <li class="nav-item">
+          <%= link_to "新規ノート", new_note_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to root_path, class: "nav-link" do %>
+            通知&nbsp;
+            <% if 3 > 0 %>
+              <span class="badge badge-dark"><%= 3 %></span>
+            <% end %>
+          <% end %>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.display_name %><b class="caret"></b></a>
           <ul class="dropdown-menu dropdown-menu-right">
             <li><%= link_to "プロフィール", user_path(current_user), class: "dropdown-item" %></li>
             <li><%= link_to "アカウント設定", edit_user_registration_path, class: "dropdown-item" %></li>
