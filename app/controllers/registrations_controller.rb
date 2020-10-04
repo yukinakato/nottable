@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters  
+  
   protected
 
   # パスワードなしでユーザー情報を更新できるようにする
@@ -9,5 +11,9 @@ class RegistrationsController < Devise::RegistrationsController
   # ユーザー情報更新後は編集ページを再度表示する
   def after_update_path_for(resource)
     edit_user_registration_path
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:display_name])
   end
 end
