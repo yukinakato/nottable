@@ -2,5 +2,5 @@ class Note < ApplicationRecord
   belongs_to :user
   belongs_to :note_entity, polymorphic: true
 
-  validates :title, presence: true, length: { maximum: NOTE_TITLE_MAX_LENGTH }
+  validates :title, presence: true, length: { maximum: Constants::NOTE_TITLE_MAX_LENGTH }
 end

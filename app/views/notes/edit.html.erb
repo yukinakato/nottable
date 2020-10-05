@@ -1,0 +1,22 @@
+<%= form_with model: @note, local: true do |f| %>
+  <%= render 'shared/object_error', object: f.object %>
+  <%= f.label :title, "タイトル" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content, "内容" %>
+  <% if @note.note_entity.is_a?(MarkdownNote) %>
+    <div class="md_field">
+      <%= f.text_area :content, value: @note.note_entity.content %>
+    </div>
+  <% else %>
+    <%= form_with model: @note.note_entity, url: "" do |f| %>
+      <div class="rich_field">
+        <%= f.rich_text_area :content, name: "note[content]" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= f.submit "更新" %>
+<% end %>
+
+<%= link_to "削除", note_path(@note), method: :delete, data: { confirm: "この投稿を削除しますか？" } %>
