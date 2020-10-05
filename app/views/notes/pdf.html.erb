@@ -1,0 +1,13 @@
+<p>
+  <strong>Title:</strong>
+  <%= @note.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <% if @note.note_entity.is_a?(MarkdownNote) %>
+    <%= render_markdown(@note.note_entity.content) %>
+  <% else %>
+    <%= @note.note_entity.content %>
+  <% end %>
+</p>

@@ -11,4 +11,7 @@ title is:
 <% end %>
 
 <%= link_to "編集", edit_note_path(@note) %>
+
+<%= link_to "get your pdf now!", create_pdf_path(@note), target: "_blank", rel: "noopener noreferrer" %>
+
 <% console %>

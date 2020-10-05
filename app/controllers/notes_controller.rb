@@ -52,4 +52,10 @@ class NotesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def create_pdf
+    @note = Note.find(params[:id])
+    render pdf: "download", template: 'notes/pdf'
+    # response.headers["Content-Disposition"] = "attachment"
+  end
 end

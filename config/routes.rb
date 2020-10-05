@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :notes
+  get "notes/:id/pdf", to: "notes#create_pdf", as: :create_pdf
   resources :bookmarks, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resource :notifications, only: [:show, :destroy]
