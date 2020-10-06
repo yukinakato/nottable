@@ -1,0 +1,50 @@
+<% markdown_mode = note.note_entity.nil? || note.note_entity.is_a?(MarkdownNote) %>
+
+<p>create your note now!</p>
+
+<%= form_with model: note, local: true do |f| %>
+  <%= render 'shared/object_error', object: f.object %>
+  <%= render 'shared/note_entity_error', object: f.object %>
+  <%= f.label :title, "タイトル" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content, "内容" %>
+  <%= f.radio_button :mode, "markdown", checked: markdown_mode %>
+  <%= f.label :mode_markdown, "マークダウンモード" %>
+  <%= f.radio_button :mode, "richtext", checked: !markdown_mode %>
+  <%= f.label :mode_richtext, "リッチテキストモード" %>
+
+  <% if note.note_entity.nil? %>
+    <div class="md_field">
+      <%= f.text_area :content %>
+    </div>
+    <div class="rich_field" style="display: none;">
+      <%= f.rich_text_area :content, name: "" %>
+    </div>
+  <% else %>
+    <% if note.note_entity.is_a?(MarkdownNote) %>
+      <div class="md_field">
+        <%= f.text_area :content, value: note.note_entity.content %>
+      </div>
+      <div class="rich_field" style="display: none;">
+        <%= f.rich_text_area :content, name: "" %>
+      </div>
+    <% else %>
+      <div class="md_field" style="display: none;">
+        <%= f.text_area :content, name: "" %>
+      </div>
+      <%= fields_for note.note_entity do |fr| %>
+        <div class="rich_field">
+          <%= fr.rich_text_area :content, name: "note[content]" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= f.check_box :private, checked: note.private %>
+  <%= f.label :private, "プライベートにする" %>
+
+  <%= f.submit "作成" %>
+<% end %>
+
+<%= javascript_pack_tag 'new_note' %>

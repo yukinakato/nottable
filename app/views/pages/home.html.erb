@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div>
   <% if user_signed_in? %>
-    ログインずみ用トップページ
+    <%= render 'shared/list_and_view', notes: @notes, note: @notes.first %>
   <% else %>
     未ログイン用トップページ
     <%= render 'devise/sessions/login_form' %>

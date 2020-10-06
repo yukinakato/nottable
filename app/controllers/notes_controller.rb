@@ -2,11 +2,12 @@ class NotesController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @note = current_user.notes.build
-    @mdn = MarkdownNote.new
+    @notes = current_user.notes
+    @note = Note.new
   end
 
   def show
+    @notes = current_user.notes
     @note = Note.find(params[:id])
   end
 
@@ -24,15 +25,18 @@ class NotesController < ApplicationController
         flash[:success] = "作成しました。"
         redirect_to @note
       else
+        @notes = current_user.notes
         render new_note_path
       end
     else
       @note.valid?
+      @notes = current_user.notes
       render new_note_path
     end
   end
 
   def edit
+    @notes = current_user.notes
     @note = Note.find(params[:id])
   end
 
@@ -47,7 +51,7 @@ class NotesController < ApplicationController
     note = Note.find(params[:id])
     if note.user == current_user
       note.destroy
-      redirect_to user_path(current_user)
+      redirect_to root_path
     else
       redirect_to root_path
     end

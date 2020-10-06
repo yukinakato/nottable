@@ -1,5 +1,24 @@
 @import "bootstrap/scss/bootstrap";
 
-h1 {
-  color: red;
+* {
+  outline: 1px solid #aaaaaa;
+}
+
+.list-and-view{
+  height: 80vh;
+  display: flex;
+}
+.left-pane {
+  overflow: auto;
+  resize: horizontal;
+  min-width: 50px;
+  width: 150px;
+}
+.right-pane {
+  flex-grow: 1;
+  min-width: 10px;
+}
+.note-content{
+  overflow: auto;
+  height: 100%;
 }

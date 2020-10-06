@@ -1,0 +1,12 @@
+<div class="list-and-view">
+  <div class="left-pane">
+    <%= render 'notes/list', notes: notes %>
+  </div>
+  <div class="right-pane">
+  <% if note.nil? %>
+    作成しましょう！
+  <% else %>
+    <%= render 'notes/content', note: note %>
+  <% end %>
+  </div>
+</div>
