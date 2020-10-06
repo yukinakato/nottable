@@ -6,6 +6,8 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:followed_id])
     redirect_to root_path and return if @user.nil?
     current_user.follow(@user)
+    # フォローした相手に対して通知を作成
+    @user.notifications.create(notify_entity: Relationship.find_by(follower: current_user, followed: @user))
     respond_to do |format|
       format.html { redirect_to @user }
       format.js

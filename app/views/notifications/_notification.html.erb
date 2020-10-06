@@ -1,0 +1,14 @@
+<% case notification.notify_entity %>
+<% when Note %>
+<% actor = notification.notify_entity.user %>
+<% target = notification.notify_entity %>
+<div class="notification <%= "notification-unread" if notification.unread %>">
+  <%= link_to actor.display_name, user_path(actor) %>さんがノートを作成しました！
+  <%= link_to target.title, note_path(target) %>
+</div>
+<% when Relationship %>
+<% actor = notification.notify_entity.follower %>
+<div class="notification <%= "notification-unread" if notification.unread %>">
+  <%= link_to actor.display_name, user_path(actor) %>さんがあなたをフォローしました！
+</div>
+<% end %>

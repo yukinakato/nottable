@@ -14,16 +14,22 @@ class NotesController < ApplicationController
   end
 
   def create
-    if params[:note][:mode] == "markdown"
-      @entity = MarkdownNote.new(content: params[:note][:content])
-    else
-      @entity = RichNote.new(content: params[:note][:content])
-    end
+    @entity = if params[:note][:mode] == "markdown"
+                MarkdownNote.new(content: params[:note][:content])
+              else
+                RichNote.new(content: params[:note][:content])
+              end
     title = params[:note][:title]
     private = params[:note][:private] == "1"
     @note = current_user.notes.build(title: title, note_entity: @entity, private: private)
     if @entity.valid?
       if @note.save
+        # プライベートノートでなければフォロワーに対して通知を作成
+        unless private
+          current_user.followers.each do |follower|
+            follower.notifications.create(user: follower, notify_entity: @note)
+          end
+        end
         flash[:success] = "作成しました。"
         redirect_to @note
       else
