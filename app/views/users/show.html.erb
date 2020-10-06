@@ -1,2 +1,4 @@
 プロフィール
 <%= @user.display_name %>
+
+<%= render 'relationships/follow_form', user: @user if current_user != @user %>
