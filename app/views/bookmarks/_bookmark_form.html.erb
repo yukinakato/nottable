@@ -1,0 +1,7 @@
+<div class="bookmark-form">
+  <% if current_user.bookmarked?(note) %>
+    <%= render 'bookmarks/unbookmark', note: note %>
+  <% else %>
+    <%= render 'bookmarks/bookmark', note: note %>
+  <% end %>
+</div>

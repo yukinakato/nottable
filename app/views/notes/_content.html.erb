@@ -11,7 +11,11 @@ title is:
   <%= note.note_entity.content %>
 <% end %>
 
-<%= link_to "編集", edit_note_path(note) %>
+<% if current_user == note.user %>
+  <%= link_to "編集", edit_note_path(note) %>
+<% end %>
+
+<%= render 'bookmarks/bookmark_form', note: note %>
 
 <%= link_to "get your pdf now!", create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" %>
 </div>
