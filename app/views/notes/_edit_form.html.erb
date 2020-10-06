@@ -23,4 +23,6 @@
   <%= f.submit "更新" %>
 <% end %>
 
-<%= link_to "削除", note_path(note), method: :delete, data: { confirm: "この投稿を削除しますか？" } %>
+<%= link_to note_path(note), method: :delete, data: { confirm: "この投稿を削除しますか？" } do %>
+  <i class="fas fa-trash-alt"></i>
+<% end %>
