@@ -3,14 +3,21 @@ class NotesController < ApplicationController
 
   def new
     @notes = current_user.notes
+    @bookmarked_notes = current_user.bookmarked_notes #_filtered
     @note = Note.new
-    @bookmarked_notes = current_user.bookmarked_notes
   end
 
   def show
     @notes = current_user.notes
-    @note = Note.find(params[:id])
     @bookmarked_notes = current_user.bookmarked_notes
+    @note = Note.find(params[:id])
+    @prohibited = false
+    # view にうつしても良いかもしれない
+    if (@note.user != current_user) && @note.private
+      # 他人のプライベートノートは見られない
+      @prohibited = true
+      # redirect_to root_path
+    end
   end
 
   def create
@@ -50,7 +57,9 @@ class NotesController < ApplicationController
 
   def update
     note = Note.find(params[:id])
-    note.update(title: params[:note][:title])
+    title = params[:note][:title]
+    private = params[:note][:private] == "1"
+    note.update(title: title, private: private)
     note.note_entity.update(content: params[:note][:content])
     redirect_to note_path(note)
   end

@@ -41,4 +41,9 @@ class User < ApplicationRecord
   def unread_notifications
     notifications.where(unread: true)
   end
+
+  # ブックマーク取得（自分のノートは全て、他人のノートはプライベートでないもののみ）
+  def bookmarked_notes_filtered
+    bookmarked_notes.where("notes.user_id = ? OR private = false", id)
+  end
 end

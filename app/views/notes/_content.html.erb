@@ -1,21 +1,28 @@
 <div class="note-content">
-now showing note! 
-title is: 
-<%= note.title %>
+  <% if @prohibited %>
+    <%= render 'bookmarks/bookmark_form', note: note %>
+    プライベートに設定されました。
+    ノートの作成者がプライベートを解除すると内容を見られるようになります。
+  <% else %>
+    now showing note! 
+    title is: 
+    <%= note.title %>
 
-<% if note.note_entity.is_a?(MarkdownNote) %>
-  you are using markdown mode 
-  <%= render_markdown(note.note_entity.content) %>
-<% else %>
-  it seems you are using actiontext for now
-  <%= note.note_entity.content %>
-<% end %>
+    <% if note.note_entity.is_a?(MarkdownNote) %>
+      you are using markdown mode 
+      <%= render_markdown(note.note_entity.content) %>
+    <% else %>
+      it seems you are using actiontext for now
+      <%= note.note_entity.content %>
+    <% end %>
 
-<% if current_user == note.user %>
-  <%= link_to "編集", edit_note_path(note) %>
-<% end %>
+    <% if current_user == note.user %>
+      <%= link_to "編集", edit_note_path(note) %>
+    <% end %>
 
-<%= render 'bookmarks/bookmark_form', note: note %>
+    <%= render 'bookmarks/bookmark_form', note: note %>
 
-<%= link_to "get your pdf now!", create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" %>
+    <%= link_to "get your pdf now!", create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" %>
+
+  <% end %>
 </div>
