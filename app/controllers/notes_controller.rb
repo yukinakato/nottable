@@ -4,11 +4,13 @@ class NotesController < ApplicationController
   def new
     @notes = current_user.notes
     @note = Note.new
+    @bookmarked_notes = current_user.bookmarked_notes
   end
 
   def show
     @notes = current_user.notes
     @note = Note.find(params[:id])
+    @bookmarked_notes = current_user.bookmarked_notes
   end
 
   def create

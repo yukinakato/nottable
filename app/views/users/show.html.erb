@@ -2,3 +2,9 @@
 <%= @user.display_name %>
 
 <%= render 'relationships/follow_form', user: @user if current_user != @user %>
+
+投稿一覧<br>
+
+<% @notes.each do |note| %>
+  <%= note.title %>
+<% end %>

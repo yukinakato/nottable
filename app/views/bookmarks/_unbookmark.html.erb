@@ -1,5 +1,5 @@
 <%= form_with(model: current_user.bookmarks.find_by(note_id: note.id), method: :delete, local: true) do |f| %>
   <%= f.button do %>
-    <i class="fas fa-star"></i>
+    <i class="fas fa-bookmark"></i>
   <% end %>
 <% end %>
