@@ -8,7 +8,11 @@ Rails.application.routes.draw do
       get 'bookmark'
     end
   end
-  resources :notes
+  resources :notes do
+    collection do
+      post 'search'
+    end
+  end
   get "notes/:id/pdf", to: "notes#create_pdf", as: :create_pdf
   resources :bookmarks, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]

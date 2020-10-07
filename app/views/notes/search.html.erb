@@ -1,0 +1,20 @@
+<% provide(:title, "検索結果") %>
+
+<h3>検索結果</h3>
+<div>
+私のノート
+</div>
+<div>
+  <% @search_results.where(user: current_user).each do |note| %>
+    <%= note.title %>
+  <% end %>  
+</div>
+
+<div>
+みんなのノート
+</div>
+<div>
+  <% @search_results.where.not(user: current_user).no_private.each do |note| %>
+    <%= note.title %>
+  <% end %>  
+</div>

@@ -5,12 +5,14 @@
     </div>
     <ul class="navbar-nav navbar-right">
       <% if user_signed_in? %>
-        <div class="navbar-form navbar-left">
-          <%#= form_with url: search_path, method: :post, local: true do |f| %>
-            <%#= f.search_field :searchkey, class: "form-control", placeholder: "検索(例: 酒、猫、花)", required: true %>
-          <%# end %>
+        <div class="navbar-form">
+          <%= form_with url: search_notes_path, class: "form-inline", method: :post, local: true do |f| %>
+            <%= f.search_field :searchkey, class: "form-control", placeholder: "キーワード検索", required: true %>
+            <%= f.button class: "search-icon" do %>
+              <i class="fas fa-search"></i>
+            <% end %>
+          <% end %>
         </div>
-
         <li class="nav-item">
           <%= link_to "新規ノート", new_note_path, class: "nav-link" %>
         </li>

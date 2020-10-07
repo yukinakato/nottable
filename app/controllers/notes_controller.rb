@@ -79,6 +79,11 @@ class NotesController < ApplicationController
     end
   end
 
+  def search
+    @search_results = Note.search(params[:searchkey])
+    render 'notes/search'
+  end
+
   def create_pdf
     @note = Note.find(params[:id])
     render pdf: "download", template: 'notes/pdf'

@@ -27,3 +27,20 @@ blockquote {
   overflow: auto;
   height: 100%;
 }
+.search-icon {
+  position: relative;
+  right: 35px;
+  padding: 5px;
+  border: none;
+  background-color: white;
+  .fa-search{
+    font-size: 20px;
+    color: #aaaaaa;
+  }
+  display: flex;
+  .search-icon {
+    align-self: center;
+    position: relative;
+    right: 30px;
+  }
+}
