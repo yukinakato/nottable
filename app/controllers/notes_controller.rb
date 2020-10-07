@@ -8,6 +8,7 @@ class NotesController < ApplicationController
   end
 
   def show
+    # このような設定はAjaxモードでは不要になる
     @notes = current_user.notes
     @bookmarked_notes = current_user.bookmarked_notes
     @note = Note.find(params[:id])
@@ -17,6 +18,10 @@ class NotesController < ApplicationController
       # 他人のプライベートノートは見られない
       @prohibited = true
       # redirect_to root_path
+    end
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 
