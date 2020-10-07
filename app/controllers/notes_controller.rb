@@ -12,13 +12,6 @@ class NotesController < ApplicationController
     @notes = current_user.notes
     @bookmarked_notes = current_user.bookmarked_notes
     @note = Note.find(params[:id])
-    @prohibited = false
-    # view にうつしても良いかもしれない
-    if (@note.user != current_user) && @note.private
-      # 他人のプライベートノートは見られない
-      @prohibited = true
-      # redirect_to root_path
-    end
     respond_to do |format|
       format.js
       format.html

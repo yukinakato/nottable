@@ -1,5 +1,6 @@
 <div class="note-content">
-  <% if @prohibited %>
+  <% if (note.user != current_user) && note.private %>
+  
     <%= render 'bookmarks/bookmark_form', note: note %>
     プライベートに設定されました。
     ノートの作成者がプライベートを解除すると内容を見られるようになります。
@@ -7,7 +8,12 @@
     now showing note! 
     title is: 
     <%= note.title %>
+    privatemode:
 
+    <% if note.private %>
+      <i class="fas fa-lock"></i>
+    <% end %>
+    
     <% if note.note_entity.is_a?(MarkdownNote) %>
       you are using markdown mode 
       <%= render_markdown(note.note_entity.content) %>
