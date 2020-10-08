@@ -9,19 +9,30 @@ blockquote {
   font-style: italic;
 }
 
+.navbar {
+  background-color: #e3f2fd;
+  height: 60px;
+}
 .list-and-view{
-  height: 80vh;
+  height: calc(100vh - 60px);
   display: flex;
 }
 .left-pane {
   overflow: auto;
   resize: horizontal;
-  min-width: 50px;
+  min-width: 100px;
   width: 150px;
 }
 .right-pane {
   flex-grow: 1;
   min-width: 10px;
+}
+.lets-start {
+  height: 100%;
+  .lets-start-icon{
+    font-size: 64px;
+    color: #555555;
+  }
 }
 .note-content{
   overflow: auto;
