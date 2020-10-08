@@ -6,16 +6,12 @@
 私のノート
 </div>
 <div>
-  <% @search_results.where(user: current_user).each do |note| %>
-    <%= note.title %>
-  <% end %>  
+  <%= render partial: 'notes/preview', collection: @my_notes_result, as: :note %>
 </div>
 
 <div>
 他のユーザーのノート
 </div>
 <div>
-  <% @search_results.where.not(user: current_user).no_private.each do |note| %>
-    <%= note.title %>
-  <% end %>  
+  <%= render partial: 'notes/preview', collection: @other_users_notes_result, as: :note %>
 </div>

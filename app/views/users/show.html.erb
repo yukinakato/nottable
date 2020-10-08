@@ -2,11 +2,9 @@
 <%= @user.display_name %>
 
 <%= link_to "プロフィール編集", edit_user_registration_path if @user == current_user %>
-
+<%= @user.introduce %>
 <%= render 'relationships/follow_form', user: @user if current_user != @user %>
 
 投稿一覧<br>
 
-<% @notes.each do |note| %>
-  <%= note.title %>
-<% end %>
+<%= render partial: 'notes/preview', collection: @notes, as: :note %>

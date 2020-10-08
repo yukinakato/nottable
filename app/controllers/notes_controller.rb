@@ -75,7 +75,8 @@ class NotesController < ApplicationController
 
   def search
     @searchkey = params[:searchkey]
-    @search_results = Note.search(@searchkey)
+    @my_notes_result = Note.search(@searchkey).where(user: current_user)
+    @other_users_notes_result = Note.search(@searchkey).where.not(user: current_user).no_private
     render 'notes/search'
   end
 

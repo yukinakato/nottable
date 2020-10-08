@@ -1,0 +1,20 @@
+<div class="note-preview">
+  created by: 
+  <%= link_to note.user.display_name, user_path(note.user) %>
+
+  title is: 
+  <%= link_to note.title, note_path(note) %>
+
+  privatemode:
+  <% if note.private %>
+    <i class="fas fa-lock"></i>
+  <% end %>
+
+  <%= render 'bookmarks/bookmark_form', note: note %>
+
+  <% if note.note_entity.is_a?(MarkdownNote) %>
+    <%= render_markdown(note.note_entity.content) %>
+  <% else %>
+    <%= note.note_entity.content %>
+  <% end %>
+</div>

@@ -44,3 +44,10 @@ blockquote {
     right: 30px;
   }
 }
+
+.note-preview {
+  border: 1px red solid;
+  border-top: 5px red solid;
+  height: 180px;
+  overflow: hidden;
+}
