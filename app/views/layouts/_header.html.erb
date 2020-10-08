@@ -19,8 +19,8 @@
         <li class="nav-item">
           <%= link_to notifications_path, class: "nav-link" do %>
             通知&nbsp;
-            <% if current_user.unread_notifications.length > 0 %>
-              <span class="badge badge-dark"><%= current_user.unread_notifications.length %></span>
+            <% if current_user.unread_notifications_length > 0 %>
+              <span class="badge badge-dark"><%= current_user.unread_notifications_length %></span>
             <% end %>
           <% end %>
         </li>

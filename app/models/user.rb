@@ -21,6 +21,14 @@ class User < ApplicationRecord
   has_many :bookmarked_notes, through: :bookmarks, source: :note
   has_many :notifications, dependent: :destroy
 
+  def bookmark(note)
+    bookmarked_notes << note
+  end
+  
+  def unbookmark(note)
+    bookmarks.find_by(note: note).destroy
+  end
+  
   def bookmarked?(note)
     bookmarked_notes.include?(note)
   end
@@ -37,9 +45,9 @@ class User < ApplicationRecord
     following.include?(user)
   end
 
-  # 未読通知を取得する
-  def unread_notifications
-    notifications.where(unread: true)
+  # 未読通知数を取得する
+  def unread_notifications_length
+    notifications.where(unread: true).length
   end
 
   # ブックマーク取得（自分のノートは全て、他人のノートはプライベートでないもののみ）

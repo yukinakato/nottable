@@ -4,8 +4,6 @@ class NotificationsController < ApplicationController
 
   def show
     @notifications = current_user.notifications.latest
-    @notes = current_user.notes
-    @bookmarked_notes = current_user.bookmarked_notes
   end
 
   def destroy

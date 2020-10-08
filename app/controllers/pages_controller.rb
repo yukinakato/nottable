@@ -7,7 +7,4 @@ class PagesController < ApplicationController
       @user = User.new
     end
   end
-
-  def terms
-  end
 end

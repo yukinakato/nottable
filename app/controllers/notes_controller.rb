@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
+  before_action :owner_check, only: [:edit, :update, :destroy]
 
   def new
     @notes = current_user.notes
@@ -51,26 +52,19 @@ class NotesController < ApplicationController
   def edit
     @notes = current_user.notes
     @bookmarked_notes = current_user.bookmarked_notes
-    @note = Note.find(params[:id])
   end
 
   def update
-    note = Note.find(params[:id])
     title = params[:note][:title]
     private = params[:note][:private] == "1"
-    note.update(title: title, private: private)
-    note.note_entity.update(content: params[:note][:content])
-    redirect_to note_path(note)
+    @note.update(title: title, private: private)
+    @note.note_entity.update(content: params[:note][:content])
+    redirect_to note_path(@note)
   end
   
   def destroy
-    note = Note.find(params[:id])
-    if note.user == current_user
-      note.destroy
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    @note.destroy
+    redirect_to root_path
   end
 
   def search
@@ -84,5 +78,12 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     render pdf: "download", template: 'notes/pdf'
     # response.headers["Content-Disposition"] = "attachment"
+  end
+
+  private
+
+  def owner_check
+    @note = Note.find(params[:id])
+    redirect_to root_path if current_user != @note.user
   end
 end
