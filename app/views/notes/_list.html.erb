@@ -1,5 +1,5 @@
-<div>
-  <% notes.each do |note| %>
-    <%= render 'notes/title', note: note %>
-  <% end %>
-</div>
+<% notes.each do |note| %>
+  <div>
+    <%= link_to note.title, note_path(note), local: true if note.persisted? %>
+  </div>
+<% end %>

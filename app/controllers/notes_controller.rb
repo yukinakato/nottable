@@ -50,6 +50,7 @@ class NotesController < ApplicationController
 
   def edit
     @notes = current_user.notes
+    @bookmarked_notes = current_user.bookmarked_notes
     @note = Note.find(params[:id])
   end
 
@@ -73,7 +74,8 @@ class NotesController < ApplicationController
   end
 
   def search
-    @search_results = Note.search(params[:searchkey])
+    @searchkey = params[:searchkey]
+    @search_results = Note.search(@searchkey)
     render 'notes/search'
   end
 

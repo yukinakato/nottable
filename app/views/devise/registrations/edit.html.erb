@@ -1,13 +1,13 @@
 <% provide(:title, "アカウント設定") %>
 
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-4 offset-4">
     <h2>アカウント設定</h2>
     <%= form_with(model: current_user, url: user_registration_path, local: true) do |f| %>
       <%= render 'shared/object_error', object: f.object %>
 
       <%= f.label :email %><br />
-      <%= f.email_field :email, autocomplete: "email" %>
+      <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
 
       <%= f.label :display_name %>
       <%= f.text_field :display_name, class: 'form-control' %>
@@ -15,7 +15,7 @@
       <%= f.label :introduce %>
       <%= f.text_area :introduce, class: 'form-control' %>
 
-      <%= f.submit "保存", class: "btn btn-primary" %>
+      <%= f.submit "更新", class: "btn btn-primary" %>
     <% end %>
     
     <%= link_to "パスワード変更はこちら", users_edit_password_path, class: "password_change_link" %>

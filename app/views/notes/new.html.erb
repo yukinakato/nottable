@@ -1,8 +1,1 @@
-<div class="list-and-view">
-  <div class="left-pane">
-    <%= render 'notes/list', notes: @notes %>
-  </div>
-  <div class="right-pane">
-    <%= render 'notes/new_form', note: @note %>
-  </div>
-</div>
+<%= render 'layouts/list_and_view', notes: @notes, bookmarked_notes: @bookmarked_notes, note: @note, mode: Constants::MODE_BUILDER %>

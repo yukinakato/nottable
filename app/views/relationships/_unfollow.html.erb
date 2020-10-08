@@ -1,4 +1,6 @@
 <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
               method: :delete, local: true) do |f| %>
-  <%= f.button "アンフォロー" %>
+  <%= f.button do %>
+    <i class="fas fa-bell"></i>&nbsp;フォロー中
+  <% end %>
 <% end %>

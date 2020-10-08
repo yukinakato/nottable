@@ -1,6 +1,7 @@
 <% provide(:title, "検索結果") %>
 
-<h3>検索結果</h3>
+<h3><%= @searchkey %> の検索結果</h3>
+
 <div>
 私のノート
 </div>
@@ -11,7 +12,7 @@
 </div>
 
 <div>
-みんなのノート
+他のユーザーのノート
 </div>
 <div>
   <% @search_results.where.not(user: current_user).no_private.each do |note| %>

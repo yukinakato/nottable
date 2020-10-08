@@ -1,0 +1,30 @@
+<div class="note-content">
+  title is: 
+  <%= note.title %>
+
+  privatemode:
+  <% if note.private %>
+    <i class="fas fa-lock"></i>
+  <% end %>
+
+  <%= render 'bookmarks/bookmark_form', note: note %>
+    
+  <% if (note.user != current_user) && note.private %>
+    このノートはプライベートに設定されました。
+    ノートの作成者がプライベートを解除すると内容を見られるようになります。
+  <% else %>
+    <%= link_to "get your pdf now!", create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" %>
+
+    <% if current_user == note.user %>
+      <%= link_to "編集", edit_note_path(note) %>
+    <% end %>
+
+    <% if note.note_entity.is_a?(MarkdownNote) %>
+      you are using markdown mode 
+      <%= render_markdown(note.note_entity.content) %>
+    <% else %>
+      it seems you are using actiontext for now
+      <%= note.note_entity.content %>
+    <% end %>
+  <% end %>
+</div>

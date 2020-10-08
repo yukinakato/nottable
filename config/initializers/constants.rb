@@ -6,6 +6,10 @@ module Constants
 
   NOTE_TITLE_MAX_LENGTH = 50
   NOTE_CONTENT_MAX_LENGTH = 1000
+
+  MODE_VIEWER = 0
+  MODE_BUILDER = 1
+  MODE_EDITOR = 2
 end
 
 Constants.freeze

@@ -6,15 +6,13 @@ class BookmarksController < ApplicationController
     @note = Note.find(bookmark.note_id)
     if bookmark.save
       # 自分で自分のコンテンツにいいねした時は通知を作成しない
-      # if current_user.id != @note.user_id
-      #   Notification.create(user_id: @note.user_id, entity: bookmark)
-      # end
-      # respond_to do |format|
-      #   format.html { redirect_to note_path(@note) }
-      #   format.js
-      # end
-      redirect_to note_path(@note)
-      @notes = current_user.notes
+      if current_user != @note.user
+        Notification.create(user_id: @note.user_id, notify_entity: bookmark)
+      end
+      respond_to do |format|
+        format.html { redirect_to note_path(@note) }
+        format.js
+      end
     else
       if @note.nil?
         # いいねに失敗（投稿が削除されていて見つからなかった）

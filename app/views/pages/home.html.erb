@@ -1,8 +1,6 @@
-<div>
-  <% if user_signed_in? %>
-    <%= render 'shared/list_and_view', notes: @notes, bookmarked_notes: @bookmarked_notes, note: @notes.first %>
-  <% else %>
-    未ログイン用トップページ
-    <%= render 'devise/sessions/login_form' %>
-  <% end %>
-</div>
+<% if user_signed_in? %>
+  <%= render 'layouts/list_and_view', notes: @notes, bookmarked_notes: @bookmarked_notes, note: @notes.first, mode: Constants::MODE_VIEWER %>
+<% else %>
+  未ログイン用トップページ
+  <%= render 'devise/sessions/login_form' %>
+<% end %>
