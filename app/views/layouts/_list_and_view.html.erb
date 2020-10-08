@@ -14,10 +14,10 @@
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane show active" id="mynotes">
-        <%= render 'notes/list', notes: notes %>
+        <%= render partial: 'notes/list', collection: notes, as: :note %>
       </div>
       <div class="tab-pane" id="bookmarks">
-        <%= render 'notes/list', notes: bookmarked_notes %>
+        <%= render partial: 'notes/list', collection: bookmarked_notes, as: :note %>
       </div>
     </div>
   </div>
