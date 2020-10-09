@@ -10,6 +10,13 @@ blockquote {
 }
 
 // 共通
+.flash-fadeoutable{
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  z-index: 1;
+}
 .navbar {
   background-color: #e3f2fd;
   height: 60px;

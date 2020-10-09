@@ -1,12 +1,10 @@
-<% if notice.present? %>
+<% if false && notice.present? %>
   <p class="notice"><%= notice %></p>
 <% end %>
-<% if alert.present? %>
-  <p class="alert"><%= alert %></p>
-<% end %>
-<% if alert.present? %>
+<% if false && alert.present? %>
   <p class="alert"><%= alert %></p>
 <% end %>
 <% flash.each do |message_type, message| %>
-  <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+  <%= content_tag(:div, message, class: "flash-fadeoutable alert alert-#{bootstrap_alert message_type}") %>
 <% end %>
+<%= javascript_pack_tag 'flash_fadeout' %>
