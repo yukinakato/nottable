@@ -3,13 +3,13 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-require("@rails/ujs").start()
+require("@rails/ujs").start();
 // require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+require("@rails/activestorage").start();
+require("channels");
 
-import "bootstrap"
-import "@fortawesome/fontawesome-free/js/all"
+import "bootstrap";
+import "@fortawesome/fontawesome-free/js/all";
 // TODO: uncomment this
 // import "../../assets/stylesheets/custom"
 
@@ -20,5 +20,19 @@ import "@fortawesome/fontawesome-free/js/all"
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("trix")
-require("@rails/actiontext")
+require("trix");
+require("@rails/actiontext");
+
+/////
+
+$("a[data-remote=true]").on("click", function () {
+  history.pushState("ajax", "", $(this).attr("href"));
+});
+
+window.onpopstate = function (e) {
+  if (e.state === "ajax") {
+    $.get(document.location.href);
+  } else {
+    window.location = document.location.href;
+  }
+};

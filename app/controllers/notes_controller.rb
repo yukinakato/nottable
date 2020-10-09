@@ -3,19 +3,22 @@ class NotesController < ApplicationController
   before_action :owner_check, only: [:edit, :update, :destroy]
 
   def new
+    @note = Note.new
     @notes = current_user.notes
     @bookmarked_notes = current_user.bookmarked_notes
-    @note = Note.new
   end
 
   def show
-    # このような設定はAjaxモードでは不要になる
-    @notes = current_user.notes
-    @bookmarked_notes = current_user.bookmarked_notes
     @note = Note.find(params[:id])
     respond_to do |format|
-      format.js
-      format.html
+      format.js do
+        # 非 Ajax ページからブラウザバックした時の対策
+        response.headers["Cache-Control"] = "no-store"
+      end
+      format.html do
+        @notes = current_user.notes
+        @bookmarked_notes = current_user.bookmarked_notes
+      end
     end
   end
 
