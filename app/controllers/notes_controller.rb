@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   def new
     @notes = current_user.notes
-    @bookmarked_notes = current_user.bookmarked_notes #_filtered
+    @bookmarked_notes = current_user.bookmarked_notes
     @note = Note.new
   end
 
@@ -62,7 +62,7 @@ class NotesController < ApplicationController
     @note.note_entity.update(content: params[:note][:content])
     redirect_to note_path(@note)
   end
-  
+
   def destroy
     @note.destroy
     redirect_to root_path

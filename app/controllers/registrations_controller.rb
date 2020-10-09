@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
       render 'devise/registrations/edit_password'
     end
   end
-  
+
   protected
 
   # パスワードなしでユーザー情報を更新できるようにする

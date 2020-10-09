@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
     target_user = User.find_by(id: params[:followed_id])
     if target_user.nil?
       redirect_to root_path
-      return 
+      return
     end
     relation = Relationship.create(follower: current_user, followed: target_user)
     # フォローした相手に対して通知を作成
@@ -22,7 +22,7 @@ class RelationshipsController < ApplicationController
     # 相手ユーザーが退会していた場合や、フォロワーが自分でない場合はルートにリダイレクト
     if relationship.nil? || relationship.follower != current_user
       redirect_to root_path
-      return 
+      return
     end
     target_user = relationship.followed
     current_user.unfollow(target_user)

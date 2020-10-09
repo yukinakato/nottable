@@ -24,11 +24,11 @@ class User < ApplicationRecord
   def bookmark(note)
     bookmarked_notes << note
   end
-  
+
   def unbookmark(note)
     bookmarks.find_by(note: note).destroy
   end
-  
+
   def bookmarked?(note)
     bookmarked_notes.include?(note)
   end
