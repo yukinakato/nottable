@@ -1,9 +1,7 @@
 <h2>ログイン</h2>
-
 <div>
-ゲストでログイン
+  ゲストでログイン
 </div>
-
 <%= form_with(model: @user, url: user_session_path, local: true) do |f| %>
   <%= f.text_field :email, class: 'form-control', placeholder: "メールアドレス", autofocus: true, autocomplete: "email" %>
   <%= f.password_field :password, class: 'form-control', placeholder: "パスワード" %>

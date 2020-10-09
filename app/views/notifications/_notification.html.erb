@@ -3,19 +3,19 @@
 <% actor = notification.notify_entity.user %>
 <% note = notification.notify_entity %>
 <div class="notification <%= "notification-unread" if notification.unread %>">
-  <%= link_to actor.display_name, user_path(actor) %>さんがノートを作成しました！
-  <%= link_to note.title, note_path(note) %>
+  <p><%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがノートを作成しました！</p>
+  <p><%= link_to note.title, note_path(note) %></p>
 </div>
 <% when Relationship %>
 <% actor = notification.notify_entity.follower %>
 <div class="notification <%= "notification-unread" if notification.unread %>">
-  <%= link_to actor.display_name, user_path(actor) %>さんがあなたをフォローしました！
+  <%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがあなたをフォローしました！
 </div>
-<% when Bookmark # 必要か要検討 %>
+<% when Bookmark # TODO: 必要か要検討 %>
 <% actor = notification.notify_entity.user %>
 <% note = notification.notify_entity.note %>
 <div class="notification <%= "notification-unread" if notification.unread %>">
-  <p><%= link_to actor.display_name, user_path(actor) %>さんがあなたのノートをブックマークしました！</p>
+  <p><%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがあなたのノートをブックマークしました！</p>
   <p><%= link_to note.title, note_path(note) %></p>
 </div>
 <% end %>

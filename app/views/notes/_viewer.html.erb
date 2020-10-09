@@ -1,33 +1,46 @@
 <div class="note-content">
-  created by: 
-  <%= link_to note.user.display_name, user_path(note.user) %>
-  
-  title is: 
-  <%= note.title %>
-
-  privatemode:
-  <% if note.private %>
-    <i class="fas fa-lock"></i>
-  <% end %>
-
-  <%= render 'bookmarks/bookmark_form', note: note %>
-    
+  <div class="note-author-area">
+    <span class="note-author">作成者</span>&nbsp;
+    <%= link_to note.user.display_name, user_path(note.user), class: "note-author-link" %>
+  </div>
+  <div class="note-title-area">
+    <% if note.private %>
+      <div class="note-private-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+    <% end %>
+    <div class="note-title">
+      <%= note.title %>
+    </div>
+  </div>
   <% if (note.user != current_user) && note.private %>
-    このノートはプライベートに設定されました。
-    ノートの作成者がプライベートを解除すると内容を見られるようになります。
+    <div class="note-tool-area">
+      <%= render 'bookmarks/bookmark_form', note: note %>
+    </div>
+    <div class="note-content-area private-notice">
+      このノートはプライベートに設定されました。
+      ノートの作成者がプライベートを解除すると内容を見られるようになります。
+    </div>
   <% else %>
-    <%= link_to "get your pdf now!", create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" %>
-
-    <% if current_user == note.user %>
-      <%= link_to "編集", edit_note_path(note) %>
-    <% end %>
-
-    <% if note.note_entity.is_a?(MarkdownNote) %>
-      you are using markdown mode 
-      <%= render_markdown(note.note_entity.content) %>
-    <% else %>
-      it seems you are using actiontext for now
-      <%= note.note_entity.content %>
-    <% end %>
+    <div class="note-tool-area">
+      <%= render 'bookmarks/bookmark_form', note: note %>
+      <% if current_user == note.user %>
+        <%= link_to edit_note_path(note), class: "note-edit-icon note-tool-icon" do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+      <% end %>
+      <%= link_to create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" do %>
+        <div class="pdf-download-button note-tool-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+      <% end %>
+    </div>
+    <div class="note-content-area">
+      <% if note.note_entity.is_a?(MarkdownNote) %>
+        <%= render_markdown(note.note_entity.content) %>
+      <% else %>
+        <%= note.note_entity.content %>
+      <% end %>
+    </div>
   <% end %>
 </div>

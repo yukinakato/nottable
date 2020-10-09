@@ -1,17 +1,16 @@
 <% provide(:title, "検索結果") %>
-
-<h3><%= @searchkey %> の検索結果</h3>
-
-<div>
-私のノート
-</div>
-<div>
-  <%= render partial: 'notes/preview', collection: @my_notes_result, as: :note %>
-</div>
-
-<div>
-他のユーザーのノート
-</div>
-<div>
-  <%= render partial: 'notes/preview', collection: @other_users_notes_result, as: :note %>
+<div class="container">
+  <p class="search-info"><%= @searchkey %> の検索結果</p>
+  <p class="search-who-index">
+    自分のノート
+  </p>
+  <div>
+    <%= render partial: 'notes/preview', collection: @my_notes_result, as: :note %>
+  </div>
+  <p class="search-who-index mt-5">
+    他のユーザーのノート
+  </p>
+  <div>
+    <%= render partial: 'notes/preview', collection: @other_users_notes_result, as: :note %>
+  </div>
 </div>

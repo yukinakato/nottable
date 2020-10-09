@@ -3,7 +3,7 @@ class BookmarksController < ApplicationController
 
   def create
     bookmark = current_user.bookmarks.build(bookmark_params)
-    note = Note.find_by(it: bookmark.note_id)
+    note = Note.find_by(id: bookmark.note_id)
     if bookmark.save
       # 自分で自分のコンテンツにいいねした時は通知を作成しない
       if current_user != note.user

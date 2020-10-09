@@ -1,10 +1,10 @@
-プロフィール
-<%= @user.display_name %>
-
-<%= link_to "プロフィール編集", edit_user_registration_path if @user == current_user %>
-<%= @user.introduce %>
-<%= render 'relationships/follow_form', user: @user if current_user != @user %>
-
-投稿一覧<br>
-
-<%= render partial: 'notes/preview', collection: @notes, as: :note %>
+<div class="container">
+  <div class="profile-area">
+    <%= @user.display_name %>
+    <%= link_to "プロフィール編集", edit_user_registration_path if @user == current_user %>
+    <%= @user.introduce %>
+    <%= render 'relationships/follow_form', user: @user if current_user != @user %>
+  </div>
+  <p>ノート一覧</p>
+  <%= render partial: 'notes/preview', collection: @notes, as: :note %>
+</div>

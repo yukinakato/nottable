@@ -1,25 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @note.title %></title>
-</head>
-<body>
-  <p>
-    <strong>Title:</strong>
-    <%= @note.title %>
-  </p>
-
-  <p>
-    <strong>Content:</strong>
-    <% if @note.note_entity.is_a?(MarkdownNote) %>
-      <%= render_markdown(@note.note_entity.content) %>
-    <% else %>
-      <%= @note.note_entity.content %>
-    <% end %>
-  </p>
-</body>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= @note.title %></title>
+    <%= wicked_pdf_stylesheet_link_tag "application" -%>
+  </head>
+  <body>
+    <div class="pdf-note-title">
+      <%= @note.title %>
+    </div>
+    <div class="note-content-area">
+      <% if @note.note_entity.is_a?(MarkdownNote) %>
+        <%= render_markdown(@note.note_entity.content) %>
+      <% else %>
+        <%= @note.note_entity.content %>
+      <% end %>
+    </div>
+  </body>
 </html>
-
-

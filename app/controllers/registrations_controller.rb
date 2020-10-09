@@ -1,5 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_action :configure_permitted_parameters  
+  before_action :configure_permitted_parameters
+
+  def edit_password
+    authenticate_scope!
+  end
 
   def update_password
     if current_user.update_with_password(passwords)
@@ -7,6 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
       bypass_sign_in(current_user)
       redirect_to edit_user_registration_path
     else
+      authenticate_scope!
       render 'devise/registrations/edit_password'
     end
   end

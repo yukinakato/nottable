@@ -57,6 +57,7 @@ class NotesController < ApplicationController
   def update
     title = params[:note][:title]
     private = params[:note][:private] == "1"
+    # 失敗をハンドリングしてください
     @note.update(title: title, private: private)
     @note.note_entity.update(content: params[:note][:content])
     redirect_to note_path(@note)

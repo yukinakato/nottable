@@ -1,25 +1,22 @@
 <% provide(:title, "アカウント設定") %>
 
-<div class="row">
-  <div class="col-4 offset-4">
-    <h2>アカウント設定</h2>
-    <%= form_with(model: current_user, url: user_registration_path, local: true) do |f| %>
-      <%= render 'shared/object_error', object: f.object %>
+<div class="col-6 offset-3 mt-3">
+  <p class="account-settings-title">アカウント設定</p>
+  <%= form_with(model: resource, url: user_registration_path, local: true) do |f| %>
+    <%= render 'shared/object_error', object: resource %>
 
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, autocomplete: "email", class: 'form-control mb-3' %>
 
-      <%= f.label :display_name %>
-      <%= f.text_field :display_name, class: 'form-control' %>
+    <%= f.label :display_name, "ニックネーム" %>
+    <%= f.text_field :display_name, class: 'form-control mb-3', maxlength: Constants::USER_DISPLAY_NAME_MAX_LENGTH %>
 
-      <%= f.label :introduce %>
-      <%= f.text_area :introduce, class: 'form-control' %>
+    <%= f.label :introduce, "自己紹介" %>
+    <%= f.text_area :introduce, class: 'form-control mb-4', maxlength: Constants::USER_INTRODUCE_MAX_LENGTH %>
 
-      <%= f.submit "更新", class: "btn btn-primary" %>
-    <% end %>
-    
-    <%= link_to "パスワード変更はこちら", users_edit_password_path, class: "password_change_link" %>
-    <%= link_to "アカウント削除はこちら", user_registration_path, class: "delete_account_link",
-                                      method: :delete, data: {confirm: "本当に削除してよろしいですか？"} %>
-  </div>
+    <%= f.submit "更新", class: "btn btn-primary mb-5" %>
+  <% end %>
+  <%= link_to "パスワード変更はこちら", users_edit_password_path, class: "password-change-link" %>
+  <%= link_to "アカウント削除はこちら", user_registration_path, class: "delete-account-link",
+                                    method: :delete, data: {confirm: "本当に削除してよろしいですか？"} %>
 </div>

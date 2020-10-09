@@ -1,3 +1,5 @@
-<div>
-  <%= link_to note.title, note_path(note), local: true if note.persisted? %>
-</div>
+<% if note.persisted? %>
+  <li class="note-list-title">
+    <%= link_to note.title, note_path(note), class: "note-list-link", remote: false %>
+  </li>
+<% end %>
