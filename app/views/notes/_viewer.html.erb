@@ -25,7 +25,7 @@
     <div class="note-tool-area">
       <%= render 'bookmarks/bookmark_form', note: note %>
       <% if current_user == note.user %>
-        <%= link_to edit_note_path(note), class: "note-edit-icon note-tool-icon" do %>
+        <%= link_to edit_note_path(note), class: "note-edit-icon note-tool-icon", remote: true do %>
           <i class="far fa-edit"></i>
         <% end %>
       <% end %>

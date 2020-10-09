@@ -23,11 +23,7 @@ import "@fortawesome/fontawesome-free/js/all";
 require("trix");
 require("@rails/actiontext");
 
-/////
-
-$("a[data-remote=true]").on("click", function () {
-  history.pushState("ajax", "", $(this).attr("href"));
-});
+//
 
 window.onpopstate = function (e) {
   if (e.state === "ajax") {
@@ -36,3 +32,9 @@ window.onpopstate = function (e) {
     window.location = document.location.href;
   }
 };
+
+window.addEventListener("load", () => {
+  document.body.addEventListener("ajax:before", (event) => {
+    history.pushState("ajax", "", event.target.pathname);
+  });
+});

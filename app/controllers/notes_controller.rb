@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
   before_action :owner_check, only: [:edit, :update, :destroy]
+  after_action :disable_cache, only: [:show, :edit]
 
   def new
     @note = Note.new
@@ -11,10 +12,7 @@ class NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
     respond_to do |format|
-      format.js do
-        # 非 Ajax ページからブラウザバックした時の対策
-        response.headers["Cache-Control"] = "no-store"
-      end
+      format.js
       format.html do
         @notes = current_user.notes
         @bookmarked_notes = current_user.bookmarked_notes
@@ -53,8 +51,13 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @notes = current_user.notes
-    @bookmarked_notes = current_user.bookmarked_notes
+    respond_to do |format|
+      format.js
+      format.html do
+        @notes = current_user.notes
+        @bookmarked_notes = current_user.bookmarked_notes
+      end
+    end
   end
 
   def update
@@ -89,5 +92,10 @@ class NotesController < ApplicationController
   def owner_check
     @note = Note.find(params[:id])
     redirect_to root_path if current_user != @note.user
+  end
+
+  # 非 Ajax ページから Ajax したページにブラウザバックした時の対策
+  def disable_cache
+    response.headers["Cache-Control"] = "no-store"
   end
 end
