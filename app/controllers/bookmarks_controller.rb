@@ -3,23 +3,23 @@ class BookmarksController < ApplicationController
 
   def create
     bookmark = current_user.bookmarks.build(bookmark_params)
-    note = Note.find_by(id: bookmark.note_id)
+    @note = Note.find_by(id: bookmark.note_id)
     if bookmark.save
       # 自分で自分のコンテンツにいいねした時は通知を作成しない
-      if current_user != note.user
-        Notification.create(user_id: note.user_id, notify_entity: bookmark)
+      if current_user != @note.user
+        Notification.create(user_id: @note.user_id, notify_entity: bookmark)
       end
       respond_to do |format|
-        format.html { redirect_to note_path(note) }
+        format.html { redirect_to note_path(n@ote) }
         format.js
       end
     else
-      if note.nil?
+      if @note.nil?
         # いいねに失敗（投稿が削除されていて見つからなかった）
         redirect_to root_path
       else
         # いいねに失敗（すでにいいねしていた）
-        redirect_to note_path(note)
+        redirect_to note_path(@note)
       end
     end
   end
@@ -31,10 +31,10 @@ class BookmarksController < ApplicationController
       redirect_to root_path
       return
     end
-    note = bookmark.note
-    current_user.unbookmark(note)
+    @note = bookmark.note
+    current_user.unbookmark(@note)
     respond_to do |format|
-      format.html { redirect_to note_path(note) }
+      format.html { redirect_to note_path(@note) }
       format.js
     end
   end
