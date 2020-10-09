@@ -8,20 +8,7 @@ blockquote {
   color: #bababa;
   font-style: italic;
 }
-.guest-login-button{
-  background-color: rgb(255, 220, 62);
-  border-radius: 8px;
-  font-weight: bold;
-  color: red;
-  padding: 12px;
-  &:hover{
-    color: red;
-    text-decoration: none;
-  }
-  &:focus{
-    background-color: rgb(252, 206, 0);;
-  }
-}
+
 // 共通
 .navbar {
   background-color: #e3f2fd;
@@ -280,5 +267,41 @@ blockquote {
     &:hover {
       color: black;
     }
+  }
+}
+
+// ランディング
+.intro-and-login-form {
+  padding-top: 20px;
+}
+.app-introduction {
+  background-color: yellow;
+  height: 100%;
+}
+.guest-login-button {
+  background-color: rgb(255, 220, 62);
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+  padding: 12px;
+  display: block;
+  margin-bottom: 30px;
+  &:hover {
+    color: red;
+  }
+  &:focus {
+    background-color: rgb(252, 206, 0);
+  }
+}
+.sns-login-button {
+  color: white;
+  &:hover {
+    color: white;
+  }
+  &.facebook {
+    background-color: #4267b2;
+  }
+  &.twitter {
+    background-color: #1da1f2;
   }
 }

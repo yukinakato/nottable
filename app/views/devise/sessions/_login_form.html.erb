@@ -1,17 +1,27 @@
-<h2>ログイン</h2>
-<div>
-  <%= link_to guestmode_path, class: "guest-login-button", local: true do %>
+<div class="login-form">
+  <%= link_to guestmode_path, class: "btn guest-login-button", local: true do %>
     今すぐお試し（ゲストでログイン）
   <% end %>
+  <%= form_with(model: @user, url: user_session_path, local: true) do |f| %>
+    <%= f.text_field :email, class: 'form-control mb-2', placeholder: "メールアドレス", autofocus: true, autocomplete: "email" %>
+    <%= f.password_field :password, class: 'form-control mb-3', placeholder: "パスワード" %>
+    <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+  <% end %>
+  <div class="text-center p-4">
+    または
+  </div>
+  <div class="text-center mb-3">
+    <%= link_to root_path, class: "btn sns-login-button facebook" do %>
+      <i class="fab fa-facebook-square"></i>&nbsp;Facebookでログイン
+    <% end %>
+  </div>
+  <div class="text-center mb-4">
+    <%= link_to root_path, class: "btn sns-login-button twitter" do %>
+      <i class="fab fa-twitter-square"></i>&nbsp;Twitterでログイン
+    <% end %>
+  </div>
+  <p class="text-center">
+    アカウントをお持ちではないですか？
+    <%= link_to "新規登録", new_user_registration_path %>
+  </p>
 </div>
-<%= form_with(model: @user, url: user_session_path, local: true) do |f| %>
-  <%= f.text_field :email, class: 'form-control', placeholder: "メールアドレス", autofocus: true, autocomplete: "email" %>
-  <%= f.password_field :password, class: 'form-control', placeholder: "パスワード" %>
-  <%= f.submit "ログイン", class: "btn btn-primary" %>
-<% end %>
-<p class="text-center">または</p>
-<p class="text-center"><%= link_to "Facebookでログイン", "#" %></p>
-<p class="text-center">
-  アカウントをお持ちではないですか？
-  <%= link_to "新規登録", new_user_registration_path %>
-</p>

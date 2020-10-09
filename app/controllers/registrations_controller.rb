@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
-  before_action :guest_check
+  before_action :guest_check, except: [:new, :create]
   before_action :configure_permitted_parameters
 
   def edit_password
@@ -40,7 +40,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def guest_check
-    if current_user.email == Constants::GUEST_EMAIL
+    if current_user&.email == Constants::GUEST_EMAIL
       flash[:warning] = "ゲストユーザーの情報は編集できません"
       redirect_to root_path
     end

@@ -1,26 +1,23 @@
 <% provide(:title, "ユーザー登録") %>
 
 <div class="container">
-  <div class="col-6 offset-3">
-    <h2>ユーザー登録</h2>
+  <div class="col-6 offset-3 mt-3">
+    <p class="account-settings-title">ユーザー登録</p>
     <%= form_with(model: @user, url: user_registration_path, local: true) do |f| %>
       <%= render "shared/object_error", object: f.object %>
 
       <%= f.label :display_name, "ニックネーム" %>
-      <%= f.text_field :display_name, class: 'form-control' %>
+      <%= f.text_field :display_name, class: 'form-control mb-3' %>
 
       <%= f.label :email, "メールアドレス" %>
-      <%= f.text_field :email, class: 'form-control' %>
+      <%= f.text_field :email, class: 'form-control mb-3' %>
 
       <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.password_field :password, class: 'form-control mb-3' %>
 
       <p><%= link_to "利用規約", terms_path, target: "_blank", rel: "noopener" %> をご確認ください。</p>
 
       <%= f.submit "登録", class: "btn btn-primary" %>
-
-      <p>または</p>
-      <p class="text-center"><%= link_to "Facebookでログイン", "#" %></p>
     <% end %>
   </div>
 </div>

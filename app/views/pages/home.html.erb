@@ -1,5 +1,16 @@
 <% if user_signed_in? %>
   <%= render 'layouts/list_and_view', notes: @notes, bookmarked_notes: @bookmarked_notes, note: @notes.first, mode: Constants::MODE_VIEWER %>
 <% else %>
-  <%= render 'devise/sessions/login_form' %>
+  <div class="container">
+    <div class="row intro-and-login-form">
+      <div class="col-6">
+        <div class="app-introduction">
+          アプリ紹介
+        </div>
+      </div>
+      <div class="col-4">
+        <%= render 'devise/sessions/login_form' %>
+      </div>
+    </div>
+  </div>
 <% end %>
