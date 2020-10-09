@@ -8,6 +8,20 @@ blockquote {
   color: #bababa;
   font-style: italic;
 }
+.guest-login-button{
+  background-color: rgb(255, 220, 62);
+  border-radius: 8px;
+  font-weight: bold;
+  color: red;
+  padding: 12px;
+  &:hover{
+    color: red;
+    text-decoration: none;
+  }
+  &:focus{
+    background-color: rgb(252, 206, 0);;
+  }
+}
 // 共通
 .navbar {
   background-color: #e3f2fd;

@@ -10,6 +10,8 @@ module Constants
   MODE_VIEWER = 0
   MODE_BUILDER = 1
   MODE_EDITOR = 2
+
+  GUEST_EMAIL = "guest@guest"
 end
 
 Constants.freeze

@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_user!
+  before_action :guest_check
   before_action :configure_permitted_parameters
 
   def edit_password
@@ -12,7 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
       redirect_to edit_user_registration_path
     else
       authenticate_scope!
-      render 'devise/registrations/edit_password'
+      render "devise/registrations/edit_password"
     end
   end
 
@@ -35,5 +37,12 @@ class RegistrationsController < Devise::RegistrationsController
 
   def passwords
     params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
+
+  def guest_check
+    if current_user.email == Constants::GUEST_EMAIL
+      flash[:warning] = "ゲストユーザーの情報は編集できません"
+      redirect_to root_path
+    end
   end
 end
