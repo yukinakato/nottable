@@ -42,6 +42,8 @@ blockquote {
   box-shadow: 1px 1px 4px #aaaaaa;
   .nav-link {
     color: #aaaaaa;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 .right-pane {
@@ -65,6 +67,13 @@ blockquote {
     padding: 0;
   }
 }
+.tab-content {
+  margin-top: 2px;
+}
+.tab-icon-description {
+  font-size: 9px;
+  margin: 0;
+}
 // リスト部
 .note-list-title {
   text-decoration: none;
@@ -83,9 +92,6 @@ blockquote {
       background-color: #fff5e0;
     }
   }
-}
-.tab-content {
-  margin-top: 2px;
 }
 // エディター共通の設定
 .note-edit-area {

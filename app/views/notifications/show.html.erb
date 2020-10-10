@@ -6,7 +6,7 @@
     <%= form_with url: notifications_path, method: :delete, local: true do |f| %>
       <%= f.button "通知を削除", class: "btn btn-warning mb-4" %>
     <% end %>
-    <div class="notifications">
+    <div class="notifications mb-4">
       <%= render @notifications %>
     </div>
   <% end %>

@@ -25,7 +25,7 @@ class NotesController < ApplicationController
                 RichNote.new(content: param_content)
               end
     @note = current_user.notes.build(title: param_title, note_entity: @entity, private: param_private?)
-    @note.valid? # エラーメッセージを格納する
+    @note.valid? # 先にエラーメッセージを格納する
     if @entity.valid? && @note.save
       # プライベートノートでなければフォロワーに対して通知を作成
       unless param_private?
