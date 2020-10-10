@@ -1,1 +1,1 @@
-$(".flash-fadeoutable").delay(2800).fadeOut(1000)
+$(".flash-fadeoutable").delay(2500).fadeOut(1000)

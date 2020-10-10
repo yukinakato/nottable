@@ -272,7 +272,7 @@ blockquote {
 
 // 通知
 .notification {
-  min-height: 50px;
+  display: flex;
   border-top: 1px solid #dfdfdf;
   .notification-image-link {
     margin-right: 10px;
@@ -284,6 +284,7 @@ blockquote {
     margin-bottom: 0;
   }
   .actor-link {
+    text-decoration: underline;
     color: black;
     &:hover {
       color: black;

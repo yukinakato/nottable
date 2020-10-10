@@ -1,21 +1,37 @@
+<% avatar_size = 70 %>
 <% case notification.notify_entity %>
 <% when Note %>
 <% actor = notification.notify_entity.user %>
 <% note = notification.notify_entity %>
 <div class="notification <%= "notification-unread" if notification.unread %>">
-  <p><%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがノートを作成しました！</p>
-  <p><%= link_to note.title, note_path(note) %></p>
+  <div class="user-avatar-area mr-3">
+    <%= get_user_avatar(actor, size: avatar_size) %>
+  </div>
+  <div class="notification-detail-area">
+    <p><%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがノートを作成しました！</p>
+    <p><%= link_to note.title, note_path(note) %></p>
+  </div>
 </div>
 <% when Relationship %>
 <% actor = notification.notify_entity.follower %>
 <div class="notification <%= "notification-unread" if notification.unread %>">
-  <%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがあなたをフォローしました！
+  <div class="user-avatar-area mr-3">
+    <%= get_user_avatar(actor, size: avatar_size) %>
+  </div>
+  <div class="notification-detail-area">
+    <%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがあなたをフォローしました！
+  </div>
 </div>
 <% when Bookmark # TODO: 必要か要検討 %>
 <% actor = notification.notify_entity.user %>
 <% note = notification.notify_entity.note %>
 <div class="notification <%= "notification-unread" if notification.unread %>">
-  <p><%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがあなたのノートをブックマークしました！</p>
-  <p><%= link_to note.title, note_path(note) %></p>
+  <div class="user-avatar-area mr-3">
+    <%= get_user_avatar(actor, size: avatar_size) %>
+  </div>
+  <div class="notification-detail-area">
+    <p><%= link_to actor.display_name, user_path(actor), class: "actor-link" %> さんがあなたのノートをブックマークしました！</p>
+    <p><%= link_to note.title, note_path(note) %></p>
+  </div>
 </div>
 <% end %>
