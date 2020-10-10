@@ -1,16 +1,12 @@
 @import "bootstrap/scss/bootstrap";
 
-z {
-  outline: 1px solid #aaaaaa;
-}
-
 blockquote {
   color: #bababa;
   font-style: italic;
 }
 
 // 共通
-.flash-fadeoutable{
+.flash-fadeoutable {
   position: absolute;
   width: 50%;
   left: 25%;
@@ -141,7 +137,7 @@ blockquote {
   display: inline;
   margin-right: 10px;
   font-size: 24px;
-  filter: drop-shadow(1px 1px 0px #6e5101);
+  filter: drop-shadow(1px 1px 0px #c9b98c);
 }
 .pdf-download-button {
   color: #ee0000;
@@ -248,8 +244,20 @@ blockquote {
 
 // プロフィール
 .profile-area {
-  background-color: yellow;
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+  .detail-area {
+    .user-name {
+      font-size: 24px;
+    }
+    .stop-follow {
+      background-color: #dddddd;
+    }
+  }
 }
+
+// ユーザー情報編集
 .delete-account-link {
   float: right;
 }

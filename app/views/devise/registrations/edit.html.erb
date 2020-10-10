@@ -2,10 +2,19 @@
 
 <div class="col-6 offset-3 mt-3">
   <p class="account-settings-title">アカウント設定</p>
+  <div class="avatar-area mb-3">
+    <%= get_user_avatar(resource, size: 100) %>
+    <% if resource.persisted? && resource.avatar.attached? %>
+      <%= button_to "アバターを削除", users_edit_delete_avatar_path %>
+    <% end %>
+  </div>
   <%= form_with(model: resource, url: user_registration_path, local: true) do |f| %>
     <%= render 'shared/object_error', object: resource %>
 
-    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.label :avatar, "アバター" %>
+    <%= f.file_field :avatar, class: "form-control-file", accept: "image/jpeg, image/png" %><br>
+
+    <%= f.label :email, "メールアドレス" %>
     <%= f.email_field :email, autocomplete: "email", class: 'form-control mb-3' %>
 
     <%= f.label :display_name, "ニックネーム" %>

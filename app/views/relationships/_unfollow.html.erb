@@ -1,6 +1,6 @@
 <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
               method: :delete, local: true) do |f| %>
-  <%= f.button do %>
-    <i class="fas fa-bell"></i>&nbsp;フォロー中
+  <%= f.button class: "btn stop-follow" do %>
+    <i class="far fa-bell-slash"></i>&nbsp;アンフォロー
   <% end %>
 <% end %>

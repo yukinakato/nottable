@@ -18,6 +18,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def delete_avatar
+    current_user.avatar.purge
+    flash[:success] = "アバターを削除しました"
+    redirect_to edit_user_registration_path
+  end
+
   protected
 
   # パスワードなしでユーザー情報を更新できるようにする
@@ -32,7 +38,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:display_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:display_name, :introduce, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :display_name, :introduce, :password, :password_confirmation])
   end
 
   def passwords

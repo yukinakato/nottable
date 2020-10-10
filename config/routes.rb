@@ -6,12 +6,9 @@ Rails.application.routes.draw do
     get "/guestmode", to: "sessions#guest_sign_in"
     get "/users/edit/password", to: "registrations#edit_password"
     patch "/users/edit/password", to: "registrations#update_password"
+    post "/users/edit/delete_avatar", to: "registrations#delete_avatar"    
   end
-  resources :users, only: :show do
-    member do
-      get "bookmark"
-    end
-  end
+  resources :users, only: :show
   resources :notes do
     collection do
       post "search"

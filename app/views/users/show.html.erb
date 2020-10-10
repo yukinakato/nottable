@@ -1,10 +1,20 @@
-<div class="container">
-  <div class="profile-area">
-    <%= @user.display_name %>
-    <%= link_to "プロフィール編集", edit_user_registration_path if @user == current_user %>
-    <%= @user.introduce %>
-    <%= render 'relationships/follow_form', user: @user if current_user != @user %>
+<div class="container mt-4">
+  <div class="profile-area mb-4">
+    <div class="avatar-area mr-4">
+      <%= get_user_avatar(@user, size: 160) %>
+    </div>
+    <div class="detail-area">
+      <p class="user-name mb-3">
+        <%= @user.display_name %>
+      </p>
+      <%= render 'relationships/follow_form', user: @user if current_user != @user %>
+      <p class="user-introduce mt-3">
+        <%= @user.introduce %>
+      </p>
+    </div>
   </div>
-  <p>ノート一覧</p>
-  <%= render partial: 'notes/preview', collection: @notes, as: :note %>
+  <div class="note-list-area">
+    <p>ノート一覧</p>
+    <%= render partial: 'notes/preview', collection: @notes, as: :note %>
+  </div>
 </div>

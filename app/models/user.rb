@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :bookmarked_notes, through: :bookmarks, source: :note
   has_many :notifications, dependent: :destroy
 
+  has_one_attached :avatar
+  validates :avatar, size: { less_than: 2.megabytes , message: "file size too big" }
+
   def bookmark(note)
     bookmarked_notes << note
   end

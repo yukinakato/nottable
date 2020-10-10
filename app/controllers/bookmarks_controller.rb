@@ -10,7 +10,7 @@ class BookmarksController < ApplicationController
         Notification.create(user_id: @note.user_id, notify_entity: bookmark)
       end
       respond_to do |format|
-        format.html { redirect_to note_path(n@ote) }
+        format.html { redirect_to note_path(@note) }
         format.js
       end
     else
