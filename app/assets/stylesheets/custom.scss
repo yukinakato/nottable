@@ -18,6 +18,13 @@ blockquote {
   height: 60px;
   border-bottom: 1px solid #dddddd;
 }
+.notifications-count {
+  background-color: rgb(252, 98, 98);
+  color: white;
+  border-radius: 50%;
+  position: relative;
+  bottom: 2px;
+}
 .list-and-view {
   height: calc(100vh - 60px);
   display: flex;
