@@ -1,44 +1,42 @@
 <div class="note-edit-area">
   <div class="container">
-    <div class="col-10 offset-1">
-      <%= form_with model: note, local: true do |f| %>
-        <%= render 'shared/object_error', object: f.object %>
-        <%= render 'shared/note_entity_error', object: f.object %>
-        <div class="note-editor-part-area">
-          <%= f.label :title, "タイトル", class: "note-editor-title" %>
-          <%= f.text_field :title, class: "form-control", required: true %>
-        </div>
-        <div class="note-editor-part-area">
-          <%= f.label :content, "内容", class: "note-editor-title" %><br>
-          <% if note.note_entity.is_a?(MarkdownNote) %>
-            <div class="markdown-field">
-              <%= f.text_area :content, value: note.note_entity.content %>
+    <%= form_with model: note, local: true do |f| %>
+      <%= render 'shared/object_error', object: f.object %>
+      <%= render 'shared/note_entity_error', object: f.object %>
+      <div class="note-editor-part-area">
+        <%= f.label :title, "タイトル", class: "note-editor-title" %>
+        <%= f.text_field :title, class: "form-control", required: true %>
+      </div>
+      <div class="note-editor-part-area">
+        <%= f.label :content, "内容", class: "note-editor-title" %><br>
+        <% if note.note_entity.is_a?(MarkdownNote) %>
+          <div class="markdown-field">
+            <%= f.text_area :content, value: note.note_entity.content %>
+          </div>
+        <% else %>
+          <%= fields_for note.note_entity do |fr| %>
+            <div class="richtext-field">
+              <%= fr.rich_text_area :content, name: "note[content]" %>
             </div>
-          <% else %>
-            <%= fields_for note.note_entity do |fr| %>
-              <div class="richtext-field">
-                <%= fr.rich_text_area :content, name: "note[content]" %>
-              </div>
-            <% end %>
           <% end %>
-        </div>
-        <div class="note-editor-part-area">
-          <%= f.check_box :private %>&nbsp;
-          <%= f.label :private, "プライベートにする" %>
-          <div class="help-pop help-pop-private">
-            <i class="far fa-question-circle"></i>
-          </div>
-          <div class="description-private" style="display: none;">
-            他の人から見えなくなります。
-          </div>
-        </div>
-        <%= f.button class: "float-left btn btn-primary" do %>
-          <i class="fas fa-sync-alt"></i>&nbsp;更新
         <% end %>
+      </div>
+      <div class="note-editor-part-area">
+        <%= f.check_box :private %>&nbsp;
+        <%= f.label :private, "プライベートにする" %>
+        <div class="help-pop help-pop-private">
+          <i class="far fa-question-circle"></i>
+        </div>
+        <div class="description-private" style="display: none;">
+          他の人から見えなくなります。
+        </div>
+      </div>
+      <%= f.button class: "float-left btn btn-primary" do %>
+        <i class="fas fa-sync-alt"></i>&nbsp;更新
       <% end %>
-      <%= button_to note_path(note), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "float-right btn btn-danger" do %>
-        <i class="fas fa-trash"></i>&nbsp;削除
-      <% end %>
-    </div>
+    <% end %>
+    <%= button_to note_path(note), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "float-right btn btn-danger" do %>
+      <i class="fas fa-trash"></i>&nbsp;削除
+    <% end %>
   </div>
 </div>

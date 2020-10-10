@@ -1,59 +1,57 @@
 <% markdown_mode = note.note_entity.nil? || note.note_entity.is_a?(MarkdownNote) %>
 <div class="note-edit-area">
   <div class="container">
-    <div class="col-10 offset-1">
-      <%= form_with model: note, local: true do |f| %>
-        <%= render 'shared/object_error', object: f.object %>
-        <%= render 'shared/note_entity_error', object: f.object %>
-        <div class="note-editor-part-area">
-          <%= f.label :title, "タイトル", class: "note-editor-title" %>
-          <%= f.text_field :title, class: "form-control", required: true %>
-        </div>
-        <div class="note-editor-part-area">
-          <%= f.label :content, "内容", class: "note-editor-title" %><br>
-          <%= f.radio_button :mode, "markdown", checked: markdown_mode %>
-          <%= f.label :mode_markdown, "マークダウンモード" %>
-          <%= f.radio_button :mode, "richtext", checked: !markdown_mode %>
-          <%= f.label :mode_richtext, "リッチテキストモード" %>
-          <% if note.note_entity.nil? %>
+    <%= form_with model: note, local: true do |f| %>
+      <%= render 'shared/object_error', object: f.object %>
+      <%= render 'shared/note_entity_error', object: f.object %>
+      <div class="note-editor-part-area">
+        <%= f.label :title, "タイトル", class: "note-editor-title" %>
+        <%= f.text_field :title, class: "form-control", required: true %>
+      </div>
+      <div class="note-editor-part-area">
+        <%= f.label :content, "内容", class: "note-editor-title" %><br>
+        <%= f.radio_button :mode, "markdown", checked: markdown_mode %>
+        <%= f.label :mode_markdown, "マークダウンモード" %>
+        <%= f.radio_button :mode, "richtext", checked: !markdown_mode %>
+        <%= f.label :mode_richtext, "リッチテキストモード" %>
+        <% if note.note_entity.nil? %>
+          <div class="markdown-field">
+            <%= f.text_area :content %>
+          </div>
+          <div class="richtext-field" style="display: none;">
+            <%= f.rich_text_area :content, name: "" %>
+          </div>
+        <% else %>
+          <% if note.note_entity.is_a?(MarkdownNote) %>
             <div class="markdown-field">
-              <%= f.text_area :content %>
+              <%= f.text_area :content, value: note.note_entity.content %>
             </div>
             <div class="richtext-field" style="display: none;">
               <%= f.rich_text_area :content, name: "" %>
             </div>
           <% else %>
-            <% if note.note_entity.is_a?(MarkdownNote) %>
-              <div class="markdown-field">
-                <%= f.text_area :content, value: note.note_entity.content %>
+            <div class="markdown-field" style="display: none;">
+              <%= f.text_area :content, name: "" %>
+            </div>
+            <%= fields_for note.note_entity do |fr| %>
+              <div class="richtext-field">
+                <%= fr.rich_text_area :content, name: "note[content]" %>
               </div>
-              <div class="richtext-field" style="display: none;">
-                <%= f.rich_text_area :content, name: "" %>
-              </div>
-            <% else %>
-              <div class="markdown-field" style="display: none;">
-                <%= f.text_area :content, name: "" %>
-              </div>
-              <%= fields_for note.note_entity do |fr| %>
-                <div class="richtext-field">
-                  <%= fr.rich_text_area :content, name: "note[content]" %>
-                </div>
-              <% end %>
             <% end %>
           <% end %>
+        <% end %>
+      </div>
+      <div class="note-editor-part-area">
+        <%= f.check_box :private %>&nbsp;
+        <%= f.label :private, "プライベートにする" %>
+        <div class="help-pop help-pop-private">
+          <i class="far fa-question-circle"></i>
         </div>
-        <div class="note-editor-part-area">
-          <%= f.check_box :private %>&nbsp;
-          <%= f.label :private, "プライベートにする" %>
-          <div class="help-pop help-pop-private">
-            <i class="far fa-question-circle"></i>
-          </div>
-          <div class="description-private" style="display: none;">
-            他の人から見えなくなります。
-          </div>
+        <div class="description-private" style="display: none;">
+          他の人から見えなくなります。
         </div>
-        <%= f.submit "作成", class: "btn btn-primary" %>
-      <% end %>
-    </div>
+      </div>
+      <%= f.submit "作成", class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
