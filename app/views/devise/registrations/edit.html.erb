@@ -5,7 +5,7 @@
   <div class="avatar-area mb-3">
     <%= get_user_avatar(resource, size: 100) %>
     <% if resource.persisted? && resource.avatar.attached? %>
-      <%= button_to "アバターを削除", users_edit_delete_avatar_path %>
+      <%= button_to "アバターを削除", users_edit_delete_avatar_path, class: "btn btn-warning" %>
     <% end %>
   </div>
   <%= form_with(model: resource, url: user_registration_path, local: true) do |f| %>
