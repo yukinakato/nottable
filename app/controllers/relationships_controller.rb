@@ -3,16 +3,16 @@ class RelationshipsController < ApplicationController
 
   def create
     # もしユーザーが退会していた場合はルートにリダイレクト
-    target_user = User.find_by(id: params[:followed_id])
-    if target_user.nil?
+    @user = User.find_by(id: params[:followed_id])
+    if @user.nil?
       redirect_to root_path
       return
     end
-    relation = Relationship.create(follower: current_user, followed: target_user)
+    relation = Relationship.create(follower: current_user, followed: @user)
     # フォローした相手に対して通知を作成
-    target_user.notifications.create(notify_entity: relation)
+    @user.notifications.create(notify_entity: relation)
     respond_to do |format|
-      format.html { redirect_to target_user }
+      format.html { redirect_to @user }
       format.js
     end
   end
@@ -24,10 +24,10 @@ class RelationshipsController < ApplicationController
       redirect_to root_path
       return
     end
-    target_user = relationship.followed
-    current_user.unfollow(target_user)
+    @user = relationship.followed
+    current_user.unfollow(@user)
     respond_to do |format|
-      format.html { redirect_to target_user }
+      format.html { redirect_to @user }
       format.js
     end
   end
