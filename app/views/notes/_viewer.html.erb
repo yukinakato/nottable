@@ -13,7 +13,7 @@
       <%= note.title %>
     </div>
   </div>
-  <% if (note.user != current_user) && note.private %>
+  <% if current_user.prohibited?(note) %>
     <div class="note-tool-area">
       <%= render 'bookmarks/bookmark_form', note: note %>
     </div>
