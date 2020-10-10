@@ -83,6 +83,12 @@ class NotesController < ApplicationController
 
   def create_pdf
     @note = Note.find(params[:id])
+    if (@note.user != current_user) && @note.private
+      # 他人のプライベートノートはダウンロードできない
+      flash[:danger] = "このノートはプライベートに設定されています"
+      redirect_to @note
+      return
+    end
     render pdf: "download", template: 'notes/pdf'
     # response.headers["Content-Disposition"] = "attachment"
   end
