@@ -46,6 +46,7 @@ class NotesController < ApplicationController
     else
       @note.valid?
       @notes = current_user.notes
+      @bookmarked_notes = current_user.bookmarked_notes
       render new_note_path
     end
   end
