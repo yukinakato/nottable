@@ -35,6 +35,8 @@ window.onpopstate = function (e) {
 
 window.addEventListener("load", () => {
   document.body.addEventListener("ajax:before", (event) => {
-    history.pushState("ajax", "", event.target.pathname);
+    if (event.target.href) {
+      history.pushState("ajax", "", event.target.href);
+    }
   });
 });
