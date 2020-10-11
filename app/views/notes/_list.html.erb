@@ -1,5 +1,5 @@
 <% if note.persisted? %>
-  <li class="note-list-title note-id-<%= note.id %>">
+  <li class="note-list-title" id="note-id-<%= note.id %>">
     <%= link_to note.title, note_path(note), class: "note-list-link", remote: true %>
   </li>
 <% end %>
