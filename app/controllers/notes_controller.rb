@@ -80,7 +80,7 @@ class NotesController < ApplicationController
       redirect_to @note
       return
     end
-    render pdf: "download", template: 'notes/pdf'
+    render pdf: "download", javascript_delay: 500
     # response.headers["Content-Disposition"] = "attachment"
   end
 
