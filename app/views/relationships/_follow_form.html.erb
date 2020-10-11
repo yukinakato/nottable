@@ -1,4 +1,4 @@
-<div class="follow-form follow-form-id-<%= user.id %>">
+<div class="follow-form" id="follow-form-id-<%= user.id %>">
   <% if current_user.following?(user) %>
     <%= render 'relationships/unfollow', user: user %>
   <% else %>

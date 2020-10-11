@@ -1,4 +1,4 @@
-<div class="bookmark-form bookmark-note-id-<%= note.id %>">
+<div class="bookmark-form" id="bookmark-note-id-<%= note.id %>">
   <% if current_user.bookmarked?(note) %>
     <%= render 'bookmarks/unbookmark', note: note %>
   <% else %>

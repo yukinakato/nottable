@@ -1,1 +1,1 @@
-$(".follow-form-id-<%= @user.id %>").html("<%= escape_javascript render('relationships/follow', user: @user) %>");
+$("#follow-form-id-<%= @user.id %>").html("<%= escape_javascript render('relationships/follow', user: @user) %>");
