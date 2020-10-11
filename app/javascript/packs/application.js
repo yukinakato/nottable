@@ -10,6 +10,7 @@ require("channels");
 
 import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";
+
 // TODO: uncomment this
 // import "../../assets/stylesheets/custom"
 
@@ -25,6 +26,8 @@ require("@rails/actiontext");
 
 //
 
+hljs.initHighlightingOnLoad();
+
 window.onpopstate = function (e) {
   if (e.state === "ajax") {
     $.get(document.location.href);
@@ -38,5 +41,10 @@ window.addEventListener("load", () => {
     if (event.target.href) {
       history.pushState("ajax", "", event.target.href);
     }
+  });
+  document.body.addEventListener("ajax:complete", (event) => {
+    document.querySelectorAll('pre > code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
   });
 });

@@ -1,8 +1,10 @@
 @import "bootstrap/scss/bootstrap";
+@import 'highlight.js/scss/github';
 
 blockquote {
-  color: #bababa;
+  color: #666666;
   font-style: italic;
+  background-color: #f8f8f8;
 }
 
 // 共通
