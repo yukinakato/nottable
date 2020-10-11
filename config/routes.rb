@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post "/users/edit/delete_avatar", to: "registrations#delete_avatar"    
   end
   resources :users, only: :show
+  get "following", to: "users#following"
   resources :notes do
     collection do
       post "search"

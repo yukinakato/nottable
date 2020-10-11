@@ -298,6 +298,42 @@ blockquote {
   }
 }
 
+// フォロー管理画面
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  border: 1px solid #555555;
+  height: 120px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 10px #ccc;
+  position: relative;
+  .user-card-follow-form {
+    .stop-follow {
+      background-color: #dddddd;
+    }
+  }
+  .user-card-info {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    height: 80px;
+    .user-card-name {
+      font-size: 22px;
+    }
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    top: 180px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(transparent, white);
+  }
+}
+
 // ランディング
 .intro-and-login-form {
   padding-top: 20px;

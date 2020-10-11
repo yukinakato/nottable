@@ -9,4 +9,8 @@ class UsersController < ApplicationController
                @user.notes.includes(note_entity: :rich_text_content).no_private
              end
   end
+
+  def following
+    @following = current_user.following.includes(:avatar_attachment)
+  end
 end
