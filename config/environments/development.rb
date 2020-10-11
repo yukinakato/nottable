@@ -66,7 +66,7 @@ Rails.application.configure do
 
   # bullet setting
   config.after_initialize do
-    Bullet.enable = true
+    Bullet.enable = false
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
