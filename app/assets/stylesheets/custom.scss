@@ -120,6 +120,21 @@ blockquote {
 }
 .help-pop {
   display: inline;
+  position: relative;
+  &:hover .description-private {
+    display: inline-block;
+  }
+}
+.description-private {
+  display: none;
+  position: absolute;
+  left: 25px;
+  width: max-content;
+  font-size: 10px;
+  background-color: #666666;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 // ビューアー

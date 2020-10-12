@@ -11,12 +11,3 @@ $("#note_mode_richtext").on("change", function () {
   $(".richtext-field").show();
   $(".richtext-field > input").prop("name", "note[content]")  
 });
-
-$(".help-pop-private").hover(
-  function(){
-    $(".description-private").show();
-  },
-  function(){
-    $(".description-private").hide();
-  }
-);
