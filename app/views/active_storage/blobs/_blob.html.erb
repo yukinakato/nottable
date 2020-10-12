@@ -1,8 +1,13 @@
 <figure class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
   <% if blob.representable? %>
-    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]) %>
+    <% if defined? ActiveStorage::Service::DiskService %>
+      <%# ローカルストレージモード: 普段の表示、pdf?debugでは表示されるが、PDFの埋め込みはポート指定しないとできない %>
+      <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]) %>
+    <% else %>
+      <%# S3 モード: 普段の表示、pdf?debug、PDFの埋め込みもできる %>
+      <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]).service_url %>
+    <% end %>
   <% end %>
-
   <figcaption class="attachment__caption">
     <% if caption = blob.try(:caption) %>
       <%= caption %>

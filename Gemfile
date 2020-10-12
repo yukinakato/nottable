@@ -67,3 +67,4 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'active_storage_validations'
 gem 'image_processing'
+gem 'aws-sdk-s3', require: false
