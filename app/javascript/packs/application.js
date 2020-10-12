@@ -43,8 +43,17 @@ window.addEventListener("load", () => {
     }
   });
   document.body.addEventListener("ajax:complete", (event) => {
-    document.querySelectorAll('pre > code').forEach((block) => {
+    document.querySelectorAll("pre > code").forEach((block) => {
       hljs.highlightBlock(block);
     });
   });
+});
+
+window.addEventListener("trix-file-accept", function (event) {
+  var acceptTypes = ["image/jpeg", "image/png", "image/gif"];
+  var maxFileSize = 2 * 1024 * 1024;
+  if (!acceptTypes.includes(event.file.type) || event.file.size > maxFileSize) {
+    event.preventDefault();
+    alert("添付可能なファイルは、2MB以下の画像(jpeg/png/gif)のみです。");
+  }
 });
