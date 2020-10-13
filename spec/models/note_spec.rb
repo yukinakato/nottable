@@ -4,26 +4,28 @@ RSpec.describe Note, type: :model do
   describe "タイトルのバリデーションテスト" do
     subject { note }
 
+    let(:user) { create(:user) }
+
     context "タイトルがない時" do
-      let(:note) { build(:note, :markdown, title: "") }
+      let(:note) { build(:note, user: user, title: "") }
 
       it { is_expected.not_to be_valid }
     end
 
     context "タイトルが nil の時" do
-      let(:note) { build(:note, :markdown, title: nil) }
+      let(:note) { build(:note, user: user, title: nil) }
 
       it { is_expected.not_to be_valid }
     end
 
     context "タイトルがある時（文字数制限にかからない）" do
-      let(:note) { build(:note, :markdown, title: "a" * Constants::NOTE_TITLE_MAX_LENGTH) }
+      let(:note) { build(:note, user: user, title: "a" * Constants::NOTE_TITLE_MAX_LENGTH) }
 
       it { is_expected.to be_valid }
     end
 
     context "タイトルがある時（文字数制限オーバー）" do
-      let(:note) { build(:note, :markdown, title: "a" * (Constants::NOTE_TITLE_MAX_LENGTH + 1)) }
+      let(:note) { build(:note, user: user, title: "a" * (Constants::NOTE_TITLE_MAX_LENGTH + 1)) }
 
       it { is_expected.not_to be_valid }
     end
@@ -32,44 +34,48 @@ RSpec.describe Note, type: :model do
   describe "ユーザーの有無のバリデーションテスト" do
     subject { note }
 
+    let(:user) { create(:user) }
+
     context "ユーザーが存在しない時" do
-      let(:note) { build(:note, :markdown, user: nil) }
+      let(:note) { build(:note, user: nil) }
 
       it { is_expected.not_to be_valid }
     end
 
     context "ユーザーが存在する時" do
-      let(:note) { build(:note, :markdown) }
+      let(:note) { build(:note, user: user) }
 
       it { is_expected.to be_valid }
     end
   end
 
-  describe "ノート entity の有無のバリデーションテスト" do
+  describe "entity の有無のバリデーションテスト" do
     subject { note }
 
+    let(:user) { create(:user) }
+
     context "マークダウンノートがある時" do
-      let(:note) { build(:note, :markdown) }
+      let(:note) { build(:note, :markdown, user: user) }
 
       it { is_expected.to be_valid }
     end
 
     context "リッチテキストノートがある時" do
-      let(:note) { build(:note, :richnote) }
+      let(:note) { build(:note, :richnote, user: user) }
 
       it { is_expected.to be_valid }
     end
 
     context "entity がない時" do
-      let(:note) { build(:note) }
+      let(:note) { build(:note, note_entity: nil, user: user) }
 
       it { is_expected.not_to be_valid }
     end
   end
 
   describe "no_private メソッドのテスト" do
-    let!(:note_public) { create(:note, :markdown) }
-    let!(:note_private) { create(:note, :markdown, private: true) }
+    let!(:note_public) { create(:note) }
+    let!(:note_private) { create(:note, private: true) }
 
     it "プライベートノートを含まない" do
       expect(Note.no_private).to contain_exactly(note_public)

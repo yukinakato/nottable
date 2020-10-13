@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :note do
     sequence(:title) { |i| "md-title-#{format("%02d", i)}" }
     user
+    markdown
   
     trait :markdown do
       association :note_entity, factory: :markdown_note
