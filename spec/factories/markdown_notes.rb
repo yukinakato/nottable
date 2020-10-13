@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :markdown_note do
-    content { "MyText" }
+    content { "markdown content" }
   end
 end
