@@ -22,7 +22,12 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   has_one_attached :avatar
-  validates :avatar, size: { less_than: 2.megabytes , message: "file size too big" }
+  validates :avatar,
+            content_type: {
+              in: %w(image/jpeg image/gif image/png),
+              message: "must be a valid image format",
+            },
+            size: { less_than: 2.megabytes, message: "file size too big" }
 
   def bookmark(note)
     bookmarked_notes << note
@@ -54,9 +59,9 @@ class User < ApplicationRecord
   end
 
   # ブックマーク取得（自分のノートは全て、他人のノートはプライベートでないもののみ）
-  def bookmarked_notes_filtered
-    bookmarked_notes.where("notes.user_id = ? OR private = false", id)
-  end
+  # def bookmarked_notes_filtered
+  #   bookmarked_notes.where("notes.user_id = ? OR private = false", id)
+  # end
 
   # 与えられたノートの内容を見る権限があるかどうか
   def prohibited?(note)

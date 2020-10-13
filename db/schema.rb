@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2020_10_04_085540) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "display_name", null: false
-    t.string "introduce"
+    t.text "introduce"
     t.string "provider"
     t.string "uid"
     t.index ["display_name"], name: "index_users_on_display_name"
