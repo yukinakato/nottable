@@ -2,7 +2,9 @@ class Note < ApplicationRecord
   belongs_to :user
   belongs_to :note_entity, polymorphic: true
 
+  validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: Constants::NOTE_TITLE_MAX_LENGTH }
+  validates :note_entity, presence: true
 
   scope :no_private, -> { where(private: false) }
   scope :search, -> (keyword) {
