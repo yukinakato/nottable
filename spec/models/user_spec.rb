@@ -59,7 +59,7 @@ RSpec.describe User, type: :model do
 
   describe "ブックマーク関連メソッドのテスト" do
     let(:user) { create(:user) }
-    let(:note) { create(:note_markdown) }
+    let(:note) { create(:note, :markdown) }
 
     it "ブックマークに追加・削除" do
       user.bookmark(note)
@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
 
     it "unread_notifications_length メソッド" do
-      expect { create(:notification_follow, user: user) }.to change(user, :unread_notifications_length).from(0).to(1)
+      expect { create(:notification, :for_follow, user: user) }.to change(user, :unread_notifications_length).from(0).to(1)
     end
   end
 
@@ -110,25 +110,25 @@ RSpec.describe User, type: :model do
     let(:other_user) { create(:user) }
 
     context "自分のノート・公開の時" do
-      let(:note) { create(:note_markdown, user: user, private: false) }
+      let(:note) { create(:note, :markdown, user: user, private: false) }
 
       it { is_expected.to be_falsey }
     end
 
     context "自分のノート・非公開の時" do
-      let(:note) { create(:note_markdown, user: user, private: true) }
+      let(:note) { create(:note, :markdown, user: user, private: true) }
 
       it { is_expected.to be_falsey }
     end
 
     context "他人のノート・公開の時" do
-      let(:note) { create(:note_markdown, user: other_user, private: false) }
+      let(:note) { create(:note, :markdown, user: other_user, private: false) }
 
       it { is_expected.to be_falsey }
     end
 
     context "他人のノート・非公開の時" do
-      let(:note) { create(:note_markdown, user: other_user, private: true) }
+      let(:note) { create(:note, :markdown, user: other_user, private: true) }
 
       it { is_expected.to be_truthy }
     end
@@ -137,32 +137,24 @@ RSpec.describe User, type: :model do
   describe "ユーザー削除時のデータ削除テスト" do
     let(:user) { create(:user) }
 
-    context "ノート" do
-      it "ノートが削除される" do
-        create(:note_markdown, user: user)
-        expect { user.destroy }.to change(Note, :count).from(1).to(0)
-      end
+    it "ノートが削除される" do
+      create(:note, :markdown, user: user)
+      expect { user.destroy }.to change(Note, :count).from(1).to(0)
     end
 
-    context "ブックマーク" do
-      it "ブックマークが削除される" do
-        create(:bookmark, user: user)
-        expect { user.destroy }.to change(Bookmark, :count).from(1).to(0)
-      end
+    it "ブックマークが削除される" do
+      create(:bookmark, user: user)
+      expect { user.destroy }.to change(Bookmark, :count).from(1).to(0)
     end
 
-    context "relationships" do
-      it "relationships が削除される" do
-        create(:relationship, follower: user)
-        expect { user.destroy }.to change(Relationship, :count).from(1).to(0)
-      end
+    it "relationships が削除される" do
+      create(:relationship, follower: user)
+      expect { user.destroy }.to change(Relationship, :count).from(1).to(0)
     end
 
-    context "通知" do
-      it "通知が削除される" do
-        create(:notification_follow, user: user)
-        expect { user.destroy }.to change(Notification, :count).from(1).to(0)
-      end
+    it "通知が削除される" do
+      create(:notification, :for_follow, user: user)
+      expect { user.destroy }.to change(Notification, :count).from(1).to(0)
     end
   end
 end
