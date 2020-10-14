@@ -6,6 +6,8 @@ class Note < ApplicationRecord
   validates :title, presence: true, length: { maximum: Constants::NOTE_TITLE_MAX_LENGTH }
   validates :note_entity, presence: true
 
+  has_many :bookmarks, dependent: :destroy
+
   scope :no_private, -> { where(private: false) }
   scope :search, -> (keyword) {
     joins("LEFT OUTER JOIN markdown_notes ON markdown_notes.id = notes.note_entity_id").

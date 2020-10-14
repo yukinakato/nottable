@@ -73,6 +73,15 @@ RSpec.describe Note, type: :model do
     end
   end
 
+  describe "ノート削除時のデータ削除テスト" do
+    let(:note) { create(:note) }
+
+    it "関連するブックマークが削除される" do
+      create(:bookmark, note: note)
+      expect { note.destroy }.to change(Bookmark, :count).from(1).to(0)
+    end
+  end
+
   describe "no_private メソッドのテスト" do
     let!(:note_public) { create(:note) }
     let!(:note_private) { create(:note, private: true) }
