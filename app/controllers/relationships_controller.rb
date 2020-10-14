@@ -2,15 +2,16 @@ class RelationshipsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    # もしユーザーが退会していた場合はルートにリダイレクト
     @user = User.find_by(id: params[:followed_id])
-    if @user.nil?
+    if @user.nil? # ユーザーが退会している
       redirect_to root_path
       return
     end
-    relation = Relationship.create(follower: current_user, followed: @user)
-    # フォローした相手に対して通知を作成
-    @user.notifications.create(notify_entity: relation)
+    unless Relationship.find_by(follower: current_user, followed: @user) # すでにフォロー済みではない
+      relation = Relationship.new(follower: current_user, followed: @user)
+      # フォローした相手に対して通知を作成
+      @user.notifications.create(notify_entity: relation)
+    end
     respond_to do |format|
       format.html { redirect_to @user }
       format.js
@@ -19,9 +20,8 @@ class RelationshipsController < ApplicationController
 
   def destroy
     relationship = Relationship.find_by(id: params[:id])
-    # 相手ユーザーが退会していた場合や、フォロワーが自分でない場合はルートにリダイレクト
     if relationship.nil? || relationship.follower != current_user
-      redirect_to root_path
+      redirect_to(request.headers["HTTP_REFERER"] || root_path)
       return
     end
     @user = relationship.followed
