@@ -10,6 +10,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    # 見つからなかった時をハンドリングしてください
     respond_to do |format|
       format.js
       format.html do
