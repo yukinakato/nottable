@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Notes", type: :system do
   describe "表示内容のテスト" do
-    let(:user) { create(:user, display_name: "Alice") }
-    let(:markdown_note_1) { create(:markdown_note, content: "content1") }
-    let(:markdown_note_2) { create(:markdown_note, content: "content2") }
-    let!(:note_1) { create(:note, title: "test_title_1", user: user, note_entity: markdown_note_1) }
-    let!(:note_2) { create(:note, title: "test_title_2", user: user, note_entity: markdown_note_2) }
+    let(:user) { create(:user) }
+    let!(:note_1) { create(:note, user: user) }
+    let!(:note_2) { create(:note, user: user) }
 
     before do
       sign_in user
@@ -15,29 +13,29 @@ RSpec.describe "Notes", type: :system do
 
     it "左ペインのノートタイトルをクリックすると内容が表示される" do
       within "#mynotes" do
-        click_on "test_title_1"
+        click_on note_1.title
       end
 
       expect(current_path).to eq note_path(note_1)
       within ".right-pane" do
-        expect(page).to have_content "Alice"
-        expect(page).to have_content "content1"
+        expect(page).to have_content user.display_name
+        expect(page).to have_content note_1.note_entity.content
       end
 
       within "#mynotes" do
-        click_on "test_title_2"
+        click_on note_2.title
       end
 
       expect(current_path).to eq note_path(note_2)
       within ".right-pane" do
-        expect(page).not_to have_content "content1"
-        expect(page).to have_content "content2"
+        expect(page).not_to have_content note_1.note_entity.content
+        expect(page).to have_content note_2.note_entity.content
       end
     end
 
     it "編集ボタンをクリックすると編集画面が表示される" do
       within "#mynotes" do
-        click_on "test_title_1"
+        click_on note_1.title
       end
 
       within ".right-pane" do
@@ -57,8 +55,8 @@ RSpec.describe "Notes", type: :system do
   end
 
   describe "ノート作成、更新、削除" do
-    let(:user) { create(:user, display_name: "Alice") }
-    let(:note) { create(:note, user: user, title: "title") }
+    let(:user) { create(:user) }
+    let(:note) { create(:note, user: user) }
 
     before do
       sign_in user
@@ -68,31 +66,32 @@ RSpec.describe "Notes", type: :system do
     it "ノート作成" do
       click_on "新規ノート"
       fill_in "タイトル", with: "title"
-      fill_in "内容", with: "content1"
+      fill_in "内容", with: "my original content"
       click_on "作成"
 
       within ".right-pane" do
         expect(page).to have_content "作成者"
-        expect(page).to have_content "Alice"
+        expect(page).to have_content user.display_name
         expect(page).to have_content "title"
-        expect(page).to have_content "content1"
+        expect(page).to have_content "my original content"
         expect(page).to have_css ".not-bookmarked"
         expect(page).to have_css ".note-edit-icon"
+        expect(page).to have_css ".pdf-download-button"
       end
     end
 
     it "ノート更新" do
       visit note_path(note)
       find(".note-edit-icon").click
-      fill_in "内容", with: "content2"
+      fill_in "内容", with: "my new content"
       click_on "更新"
 
       within ".right-pane" do
         expect(page).to have_content "作成者"
-        expect(page).to have_content "Alice"
-        expect(page).to have_content "title"
-        expect(page).not_to have_content "content1"
-        expect(page).to have_content "content2"
+        expect(page).to have_content user.display_name
+        expect(page).to have_content note.title
+        expect(page).not_to have_content note.note_entity.content
+        expect(page).to have_content "my new content"
       end
     end
 
@@ -103,15 +102,15 @@ RSpec.describe "Notes", type: :system do
         click_on "削除"
       end
       within "#mynotes" do
-        expect(page).not_to have_content "test_title"
+        expect(page).not_to have_content note.title
       end
       expect(current_path).to eq root_path
     end
   end
 
   describe "他人のノートを表示" do
-    let(:user) { create(:user, display_name: "Alice") }
-    let(:other_user) { create(:user, display_name: "Bob") }
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
 
     before do
       sign_in user
@@ -119,20 +118,18 @@ RSpec.describe "Notes", type: :system do
     end
 
     context "公開ノートの場合" do
-      let(:markdown_note) { create(:markdown_note, content: "public") }
-      let(:note) { create(:note, user: other_user, title: "title", note_entity: markdown_note) }
+      let(:note) { create(:note, user: other_user) }
 
-      it "編集ボタンが表示されていない" do
+      it "内容は見えるが編集ボタンが表示されていない" do
         within ".right-pane" do
-          expect(page).to have_content "public"
+          expect(page).to have_content note.note_entity.content
           expect(page).not_to have_css ".note-edit-icon"
         end
       end
     end
 
     context "非公開ノートの場合" do
-      let(:markdown_note) { create(:markdown_note, content: "secret") }
-      let(:note) { create(:note, user: other_user, title: "title", note_entity: markdown_note, private: true) }
+      let(:note) { create(:note, user: other_user, private: true) }
 
       it "編集ボタンが表示されていない" do
         within ".right-pane" do
@@ -148,7 +145,7 @@ RSpec.describe "Notes", type: :system do
 
       it "内容が秘匿されている" do
         within ".right-pane" do
-          expect(page).not_to have_content "secret"
+          expect(page).not_to have_content note.note_entity.content
           expect(page).to have_content "プライベートに設定されました"
         end
       end
