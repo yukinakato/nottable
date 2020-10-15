@@ -74,11 +74,22 @@ RSpec.describe Note, type: :model do
   end
 
   describe "ノート削除時のデータ削除テスト" do
-    let(:note) { create(:note) }
+    let(:markdown_note) { create(:markdown_note) }
+    let(:note) { create(:note, note_entity: markdown_note) }
 
     it "関連するブックマークが削除される" do
       create(:bookmark, note: note)
       expect { note.destroy }.to change(Bookmark, :count).from(1).to(0)
+    end
+
+    it "関連する通知が削除される" do
+      create(:notification, notify_entity: note)
+      expect { note.destroy }.to change(Notification, :count).from(1).to(0)
+    end
+
+    it "entity が削除される" do
+      note
+      expect { note.destroy }.to change(MarkdownNote, :count).from(1).to(0)
     end
   end
 

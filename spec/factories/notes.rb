@@ -3,11 +3,11 @@ FactoryBot.define do
     sequence(:title) { |i| "md-title-#{format("%02d", i)}" }
     user
     markdown
-  
+
     trait :markdown do
       association :note_entity, factory: :markdown_note
     end
-  
+
     trait :richnote do
       association :note_entity, factory: :rich_note
     end

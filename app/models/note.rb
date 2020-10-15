@@ -1,12 +1,13 @@
 class Note < ApplicationRecord
   belongs_to :user
-  belongs_to :note_entity, polymorphic: true
+  belongs_to :note_entity, polymorphic: true, dependent: :destroy
+
+  has_many :bookmarks, dependent: :destroy
+  has_one :notification, as: :notify_entity, dependent: :destroy
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: Constants::NOTE_TITLE_MAX_LENGTH }
   validates :note_entity, presence: true
-
-  has_many :bookmarks, dependent: :destroy
 
   scope :no_private, -> { where(private: false) }
   scope :search, -> (keyword) {
