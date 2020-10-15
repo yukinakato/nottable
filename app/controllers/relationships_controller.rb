@@ -21,7 +21,12 @@ class RelationshipsController < ApplicationController
   def destroy
     relationship = Relationship.find_by(id: params[:id])
     if relationship.nil? || relationship.follower != current_user
-      redirect_to(request.headers["HTTP_REFERER"] || root_path)
+      user = User.find_by(id: params[:user][:user_id])
+      if user
+        redirect_to user
+      else
+        redirect_to root_path
+      end
       return
     end
     @user = relationship.followed
