@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Bookmarks", type: :system do
-  describe "表示内容のテスト" do
-    let(:user) { create(:user, display_name: "Alice") }
-    let(:markdown_note_1) { create(:markdown_note, content: "hello") }
-    let(:markdown_note_2) { create(:markdown_note, content: "goodbye") }
-    let!(:note_1) { create(:note, title: "test_title_1", user: user, note_entity: markdown_note_1) }
-    let!(:note_2) { create(:note, title: "test_title_2", user: user, note_entity: markdown_note_2) }
+  describe "操作と動的な表示のテスト" do
+    let(:user) { create(:user) }
+    let(:markdown_note) { create(:markdown_note) }
+    let!(:note) { create(:note, user: user, note_entity: markdown_note) }
 
     before do
       sign_in user
@@ -15,7 +13,7 @@ RSpec.describe "Bookmarks", type: :system do
 
     it "ブックマーク追加・削除すると左ペインにも反映される" do
       within "#mynotes" do
-        click_on "test_title_1"
+        click_on note.title
       end
 
       within ".right-pane" do
@@ -25,7 +23,7 @@ RSpec.describe "Bookmarks", type: :system do
 
       find("#bookmarks-tab").click
       within "#bookmarks" do
-        expect(page).to have_content "test_title_1"
+        expect(page).to have_content note.title
       end
 
       within ".right-pane" do
@@ -35,7 +33,7 @@ RSpec.describe "Bookmarks", type: :system do
 
       find("#bookmarks-tab").click
       within "#bookmarks" do
-        expect(page).not_to have_content "test_title_1"
+        expect(page).not_to have_content note.title
       end
     end
   end

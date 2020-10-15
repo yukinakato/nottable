@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :markdown_note do
-    content { "markdown content" }
+    sequence(:content) { |i| "markdown-content-#{format("%02d", i)}" }
   end
 end

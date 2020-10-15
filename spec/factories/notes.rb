@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :note do
-    sequence(:title) { |i| "md-title-#{format("%02d", i)}" }
+    sequence(:title) { |i| "note-title-#{format("%02d", i)}" }
     user
     markdown
 
