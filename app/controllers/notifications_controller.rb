@@ -14,6 +14,6 @@ class NotificationsController < ApplicationController
   private
 
   def mark_read_all
-    @notifications.update_all(unread: false)
+    current_user.mark_notifications_read_all
   end
 end

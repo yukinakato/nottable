@@ -58,6 +58,11 @@ class User < ApplicationRecord
     notifications.where(unread: true).length
   end
 
+  # 自分の通知をすべて既読にする
+  def mark_notifications_read_all
+    notifications.update_all(unread: false)
+  end
+
   # ブックマーク取得（自分のノートは全て、他人のノートはプライベートでないもののみ）
   # def bookmarked_notes_filtered
   #   bookmarked_notes.where("notes.user_id = ? OR private = false", id)
