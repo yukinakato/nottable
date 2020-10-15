@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "System", type: :system do
-  describe "表示内容のテスト" do
+RSpec.describe "LoginLogout", type: :system do
+  describe "ログイン動作のテスト" do
     let(:user) { create(:user, email: "user@example.com", password: "password", display_name: "Alice") }
     let(:guest) { create(:user, email: Constants::GUEST_EMAIL, password: "password", display_name: "Guest") }
 
@@ -24,8 +24,10 @@ RSpec.describe "System", type: :system do
       sleep 5
       expect(page).not_to have_content "ログインしました"
 
-      click_on "Alice"
-      click_on "ログアウト"
+      within ".nav-item.dropdown" do
+        click_on "Alice"
+        click_on "ログアウト"
+      end
       expect(page).not_to have_content "Alice"
       expect(page).to have_content "ログアウトしました"
       sleep 5
@@ -55,6 +57,37 @@ RSpec.describe "System", type: :system do
       click_on "ログイン"
 
       expect(current_path).to eq new_user_session_path
+    end
+  end
+
+  describe "サインアップのテスト" do
+    it "不備なくサインアップできる" do
+      visit root_path
+      within ".login-form" do
+        click_link "新規登録"
+      end
+
+      fill_in "ニックネーム", with: "nickname"
+      fill_in "メールアドレス", with: "test@example.com"
+      fill_in "パスワード", with: "password"
+      click_button "登録"
+
+      expect(page).to have_content "アカウント登録が完了しました"
+      expect(page).to have_content "まだノートを作成していません"
+      expect(page).to have_content "nickname"
+    end
+
+    it "不備がありサインアップできない" do
+      visit root_path
+      within ".login-form" do
+        click_link "新規登録"
+      end
+
+      click_button "登録"
+
+      expect(page).to have_content "メールアドレスを入力してください"
+      expect(page).to have_content "パスワードを入力してください"
+      expect(page).to have_content "ニックネームを入力してください"
     end
   end
 end
