@@ -42,4 +42,13 @@ RSpec.describe Bookmark, type: :model do
       expect { create(:bookmark, user: user, note: note) }.to raise_error ActiveRecord::RecordNotUnique
     end
   end
+
+  describe "ブックマーク解除時のデータ削除テスト" do
+    let(:bookmark) { create(:bookmark) }
+
+    it "関連する通知が削除される" do
+      create(:notification, notify_entity: bookmark)
+      expect { bookmark.destroy }.to change(Notification, :count).from(1).to(0)
+    end
+  end
 end
