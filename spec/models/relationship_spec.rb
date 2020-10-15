@@ -41,4 +41,13 @@ RSpec.describe Relationship, type: :model do
       expect { create(:relationship, follower: follower, followed: followed) }.to raise_error ActiveRecord::RecordNotUnique
     end
   end
+
+  describe "フォロー解除時のデータ削除テスト" do
+    let(:relationship) { create(:relationship) }
+
+    it "関連する通知が削除される" do
+      create(:notification, notify_entity: relationship)
+      expect { relationship.destroy }.to change(Notification, :count).from(1).to(0)
+    end
+  end
 end
