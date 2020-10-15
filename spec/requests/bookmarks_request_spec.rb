@@ -19,7 +19,8 @@ RSpec.describe "Bookmarks", type: :request do
 
       it "削除できない" do
         sign_in user
-        expect { delete bookmark_path(bookmark) }.not_to change(Bookmark, :count)
+        params = { note: { note_id: bookmark.note.id } }
+        expect { delete bookmark_path(bookmark), params: params }.not_to change(Bookmark, :count)
       end
     end
 
@@ -38,11 +39,19 @@ RSpec.describe "Bookmarks", type: :request do
       let(:note) { create(:note) }
       let!(:bookmark) { create(:bookmark, user: user, note: note) }
 
-      it "ノートパスにリダイレクト" do
+      it "ノートがまだある場合、ノートパスにリダイレクト" do
         sign_in user
         params = { bookmark: { user_id: user.id, note_id: note.id } }
         post bookmarks_path, params: params
         expect(response).to redirect_to note_path(note)
+      end
+
+      it "ノートが削除されている場合、ルートパスにリダイレクト" do
+        sign_in user
+        note.destroy
+        params = { bookmark: { user_id: user.id, note_id: note.id } }
+        post bookmarks_path, params: params
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -51,11 +60,21 @@ RSpec.describe "Bookmarks", type: :request do
       let(:note) { create(:note) }
       let!(:bookmark) { create(:bookmark, user: user, note: note) }
 
-      it "ノートパスにリダイレクト" do
+      it "ノートがまだある場合、ノートパスにリダイレクト" do
         sign_in user
+        params = { note: { note_id: note.id } }
         delete bookmark_path(bookmark)
-        delete bookmark_path(bookmark), headers: { "HTTP_REFERER": note_path(note) }
+        delete bookmark_path(bookmark), params: params
         expect(response).to redirect_to note_path(note)
+      end
+
+      it "ノートが削除されている場合、ルートパスにリダイレクト" do
+        sign_in user
+        params = { note: { note_id: note.id } }
+        delete bookmark_path(bookmark)
+        note.destroy
+        delete bookmark_path(bookmark), params: params
+        expect(response).to redirect_to root_path
       end
     end
   end

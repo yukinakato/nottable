@@ -24,7 +24,12 @@ class BookmarksController < ApplicationController
   def destroy
     bookmark = Bookmark.find_by(id: params[:id])
     if bookmark.nil? || bookmark.user != current_user
-      redirect_to(request.headers["HTTP_REFERER"] || root_path)
+      note = Note.find_by(id: params[:note][:note_id])
+      if note
+        redirect_to note
+      else
+        redirect_to root_path
+      end
       return
     end
     @note = bookmark.note
