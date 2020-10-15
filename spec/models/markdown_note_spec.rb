@@ -28,4 +28,13 @@ RSpec.describe MarkdownNote, type: :model do
       it { is_expected.not_to be_valid }
     end
   end
+
+  describe "削除時の Note 削除テスト" do
+    let(:markdown_note) { create(:markdown_note) }
+    let!(:note) { create(:note, note_entity: markdown_note) }
+
+    it "Note が削除される" do
+      expect { markdown_note.destroy }.to change(Note, :count).from(1).to(0)
+    end
+  end
 end
