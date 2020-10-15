@@ -10,7 +10,6 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    # 見つからなかった時をハンドリングしてください
     respond_to do |format|
       format.js
       format.html do
@@ -31,7 +30,7 @@ class NotesController < ApplicationController
       # プライベートノートでなければフォロワーに対して通知を作成
       unless param_private?
         current_user.followers.each do |follower|
-          follower.notifications.create(user: follower, notify_entity: @note)
+          follower.notifications.create(notify_entity: @note)
         end
       end
       flash[:success] = "作成しました。"
