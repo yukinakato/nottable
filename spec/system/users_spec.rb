@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   describe "ユーザープロフィールページの表示内容テスト" do
-    let(:user) { create(:user, display_name: "myname", introduce: "myintroduction") }
-    let(:other_user) { create(:user, display_name: "othername", introduce: "otherintroduction") }
-    let!(:my_note_public) { create(:note, title: "my_public", user: user, private: false) }
-    let!(:my_note_private) { create(:note, title: "my_private", user: user, private: true) }
-    let!(:other_user_note_public) { create(:note, title: "other_public", user: other_user, private: false) }
-    let!(:other_user_note_private) { create(:note, title: "other_private", user: other_user, private: true) }
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+    let!(:my_note_public) { create(:note, user: user, private: false) }
+    let!(:my_note_private) { create(:note, user: user, private: true) }
+    let!(:other_user_note_public) { create(:note, user: other_user, private: false) }
+    let!(:other_user_note_private) { create(:note, user: other_user, private: true) }
 
     before do
       sign_in user
@@ -24,11 +24,11 @@ RSpec.describe "Users", type: :system do
       end
 
       it "公開ノートが表示されている" do
-        expect(page).to have_content "my_public"
+        expect(page).to have_content my_note_public.title
       end
 
       it "プライベートノートが表示されている" do
-        expect(page).to have_content "my_private"
+        expect(page).to have_content my_note_private.title
       end
     end
 
@@ -43,11 +43,11 @@ RSpec.describe "Users", type: :system do
       end
 
       it "公開ノートが表示されている" do
-        expect(page).to have_content "other_public"
+        expect(page).to have_content other_user_note_public.title
       end
 
       it "プライベートノートは表示されていない" do
-        expect(page).not_to have_content "other_private"
+        expect(page).not_to have_content other_user_note_private.title
       end
     end
   end
