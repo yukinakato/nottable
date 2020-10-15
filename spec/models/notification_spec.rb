@@ -49,6 +49,35 @@ RSpec.describe Notification, type: :model do
     end
   end
 
+  describe "通知を削除しても実体は削除されないことのテスト" do
+    context "ノートの通知の場合" do
+      let(:note) { create(:note) }
+      let!(:notification) { create(:notification, notify_entity: note) }
+
+      it "ノートは削除されない" do
+        expect { notification.destroy }.not_to change(Note, :count)
+      end
+    end
+
+    context "ブックマークの通知の場合" do
+      let(:bookmark) { create(:bookmark) }
+      let!(:notification) { create(:notification, notify_entity: bookmark) }
+
+      it "ブックマークは削除されない" do
+        expect { notification.destroy }.not_to change(Note, :count)
+      end
+    end
+
+    context "フォローの通知の場合" do
+      let(:relationship) { create(:relationship) }
+      let!(:notification) { create(:notification, notify_entity: relationship) }
+
+      it "フォロー関係は削除されない" do
+        expect { notification.destroy }.not_to change(Note, :count)
+      end
+    end
+  end
+
   describe "latest スコープのテスト" do
     it "最新順に並び替えられる" do
       n_1 = create(:notification)
