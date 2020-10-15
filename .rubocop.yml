@@ -10,4 +10,3 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'node_modules/**/*'
-    - !ruby/regexp /config\/(?!routes.rb).*$/
