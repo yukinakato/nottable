@@ -8,6 +8,12 @@ class UsersController < ApplicationController
              else
                @user.notes.includes(note_entity: :rich_text_content).no_private
              end
+    # TODO
+    respond_to do |format|
+      format.html
+      format.js { render js: "window.location = '#{user_path(@user)}';" }
+    end
+    # END
   end
 
   def following

@@ -2,8 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :registerable,
          :rememberable,
-         :validatable
-  # :omniauthable
+         :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   validates :display_name, presence: true, length: { maximum: Constants::USER_DISPLAY_NAME_MAX_LENGTH }
   validates :introduce, length: { maximum: Constants::USER_INTRODUCE_MAX_LENGTH }
@@ -71,5 +71,14 @@ class User < ApplicationRecord
   # 与えられたノートの内容を見る権限があるかどうか
   def prohibited?(note)
     (note.user != self) && note.private
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.display_name = auth.info.name
+      user.from_sns = true
+    end
   end
 end

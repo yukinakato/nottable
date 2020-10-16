@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root "pages#home"
   get "/terms", to: "pages#terms"
-  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
+  devise_for :users,
+             controllers: {
+               registrations: "registrations",
+               sessions: "sessions",
+               omniauth_callbacks: 'omniauth_callbacks',
+             }
   devise_scope :user do
     get "/guestmode", to: "sessions#guest_sign_in"
     get "/users/edit/password", to: "registrations#edit_password"

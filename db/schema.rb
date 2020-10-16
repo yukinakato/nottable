@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_10_04_085540) do
     t.text "introduce"
     t.string "provider"
     t.string "uid"
+    t.boolean "from_sns", default: false
     t.index ["display_name"], name: "index_users_on_display_name"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

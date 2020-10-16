@@ -10,14 +10,9 @@
   <div class="text-center p-4">
     または
   </div>
-  <div class="text-center mb-3">
-    <%= link_to root_path, class: "btn sns-login-button facebook" do %>
-      <i class="fab fa-facebook-square"></i>&nbsp;Facebookでログイン
-    <% end %>
-  </div>
   <div class="text-center mb-4">
-    <%= link_to root_path, class: "btn sns-login-button twitter" do %>
-      <i class="fab fa-twitter-square"></i>&nbsp;Twitterでログイン
+    <%= link_to user_facebook_omniauth_authorize_path, class: "btn sns-login-button facebook" do %>
+      <i class="fab fa-facebook-square"></i>&nbsp;Facebookでログイン
     <% end %>
   </div>
   <p class="text-center">
