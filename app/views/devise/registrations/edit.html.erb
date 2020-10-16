@@ -3,8 +3,8 @@
 <div class="col-6 offset-3 mt-3">
   <p class="account-settings-title">アカウント設定</p>
   <div class="avatar-area mb-3">
-    <%= get_user_avatar(resource, size: 100) %>
-    <% if resource.persisted? && resource.avatar.attached? %>
+    <%= get_user_avatar(current_user, size: 100) %>
+    <% if current_user.avatar.attached? %>
       <%= button_to "アバターを削除", users_edit_delete_avatar_path, class: "btn btn-warning" %>
     <% end %>
   </div>

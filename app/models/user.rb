@@ -25,9 +25,9 @@ class User < ApplicationRecord
   validates :avatar,
             content_type: {
               in: %w(image/jpeg image/gif image/png),
-              message: "must be a valid image format",
+              message: "ファイル形式が正しくありません。",
             },
-            size: { less_than: 2.megabytes, message: "file size too big" }
+            size: { less_than: 2.megabytes, message: "の最大ファイルサイズは 2MB です。" }
 
   def bookmark(note)
     bookmarked_notes << note

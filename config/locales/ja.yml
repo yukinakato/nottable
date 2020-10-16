@@ -10,6 +10,7 @@ ja:
         updated_at: 更新日時
         display_name: ニックネーム
         introduce: 自己紹介
+        avatar: アバター
       note:
         title: タイトル
       markdown_note:
