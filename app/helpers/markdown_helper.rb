@@ -8,6 +8,6 @@ module MarkdownHelper
       strikethrough: true,
     }
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions)
-    markdown.render(content).html_safe
+    markdown.render(h content).html_safe
   end
 end
