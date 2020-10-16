@@ -9,7 +9,7 @@
       </p>
       <%= render 'relationships/follow_form', user: @user if current_user != @user %>
       <p class="user-introduce mt-3">
-        <%= @user.introduce %>
+        <%= simple_format(h @user.introduce) %>
       </p>
     </div>
   </div>
