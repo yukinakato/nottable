@@ -25,7 +25,12 @@
           <% end %>
         </li>
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.display_name.truncate(15) %><b class="caret"></b></a>
+          <a href="#" class="nav-link dropdown-toggle with-image" data-toggle="dropdown">
+            <%= get_user_avatar(current_user, size: 40) %>
+            <span>
+              <%= current_user.display_name.truncate(15) %><b class="caret"></b>
+            </span>
+          </a>
           <ul class="dropdown-menu dropdown-menu-right">
             <li><%= link_to "プロフィール", user_path(current_user), class: "dropdown-item" %></li>
             <li><%= link_to "フォロー管理", following_path, class: "dropdown-item" %></li>
