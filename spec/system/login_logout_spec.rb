@@ -38,10 +38,10 @@ RSpec.describe "LoginLogout", type: :system do
       guest
       click_on "今すぐお試し（ゲストでログイン）"
 
-      expect(page).to have_content "ログインしました"
+      expect(page).to have_content "ゲストユーザーとしてログインしました"
       expect(page).to have_content "Guest"
       sleep 5
-      expect(page).not_to have_content "ログインしました"
+      expect(page).not_to have_content "ゲストユーザーとしてログインしました"
 
       click_on "Guest"
       click_on "ログアウト"
