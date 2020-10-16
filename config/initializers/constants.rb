@@ -11,7 +11,8 @@ module Constants
   MODE_BUILDER = 1
   MODE_EDITOR = 2
 
-  GUEST_EMAIL = "guest@guest"
+  GUEST_EMAIL = "guest@example.com"
+  GUEST_DISPLAY_NAME = "ゲストユーザー"
 end
 
 Constants.freeze

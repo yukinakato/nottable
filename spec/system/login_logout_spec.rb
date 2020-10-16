@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "LoginLogout", type: :system do
   describe "ログイン動作のテスト" do
     let(:user) { create(:user, email: "user@example.com", password: "password", display_name: "Alice") }
-    let(:guest) { create(:user, email: Constants::GUEST_EMAIL, password: "password", display_name: "Guest") }
+    let(:guest) { create(:user, email: "guest@example.com", password: "password", display_name: "Guest") }
 
     before do
       visit root_path
