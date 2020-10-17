@@ -101,9 +101,17 @@ RSpec.describe User, type: :model do
     it "unread_notifications_length メソッド" do
       expect { create(:notification, :for_follow, user: user) }.to change(user, :unread_notifications_length).from(0).to(1)
     end
+
+    it "mark_notifications_read_all メソッド" do
+      create(:notification, :for_note, user: user)
+      create(:notification, :for_note, user: user)
+      create(:notification, :for_note, user: user)
+
+      expect { user.mark_notifications_read_all }.to change { user.reload.unread_notifications_length }.from(3).to(0)
+    end
   end
 
-  describe "ノート関連メソッドのテスト" do
+  describe "prohibited? メソッドのテスト" do
     subject { user.prohibited?(note) }
 
     let(:user) { create(:user) }
