@@ -11,7 +11,7 @@ require("channels");
 import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";
 
-// TODO?: uncomment this
+// uncomment this
 // import "../../assets/stylesheets/custom"
 
 // Uncomment to copy all static images under ../images to the output folder and reference

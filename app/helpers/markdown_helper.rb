@@ -9,6 +9,6 @@ module MarkdownHelper
     }
     renderer = Redcarpet::Render::HTML.new(escape_html: true)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
-    markdown.render((content)).html_safe
+    markdown.render(content).html_safe
   end
 end
