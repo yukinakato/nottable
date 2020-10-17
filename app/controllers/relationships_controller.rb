@@ -8,9 +8,9 @@ class RelationshipsController < ApplicationController
       return
     end
     unless Relationship.find_by(follower: current_user, followed: @user) # すでにフォロー済みではない
-      relation = Relationship.new(follower: current_user, followed: @user)
+      relationship = Relationship.new(follower: current_user, followed: @user)
       # フォローした相手に対して通知を作成
-      @user.notifications.create(notify_entity: relation)
+      @user.notifications.create(notify_entity: relationship)
     end
     respond_to do |format|
       format.html { redirect_to @user }

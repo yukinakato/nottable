@@ -68,7 +68,7 @@ class User < ApplicationRecord
   #   bookmarked_notes.where("notes.user_id = ? OR private = false", id)
   # end
 
-  # 与えられたノートの内容を見る権限があるかどうか
+  # 与えられたノートの内容を見る権限があるかのチェック
   def prohibited?(note)
     (note.user != self) && note.private
   end
