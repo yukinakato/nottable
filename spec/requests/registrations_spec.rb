@@ -53,4 +53,26 @@ RSpec.describe "Registrations", type: :request do
       end
     end
   end
+
+  describe "ユーザー削除のテスト" do
+    before do
+      sign_in user
+    end
+
+    context "通常ユーザーの場合" do
+      let(:user) { create(:user) }
+
+      it "削除できる" do
+        expect { delete user_registration_path }.to change(User, :count).from(1).to(0)
+      end
+    end
+
+    context "ゲストユーザーの場合" do
+      let(:user) { create(:user, email: Constants::GUEST_EMAIL) }
+
+      it "削除できない" do
+        expect { delete user_registration_path }.not_to change(User, :count)
+      end
+    end
+  end
 end
