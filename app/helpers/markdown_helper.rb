@@ -7,7 +7,8 @@ module MarkdownHelper
       tables: true,
       strikethrough: true,
     }
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions)
-    markdown.render(h(content)).html_safe
+    renderer = Redcarpet::Render::HTML.new(escape_html: true)
+    markdown = Redcarpet::Markdown.new(renderer, extensions)
+    markdown.render((content)).html_safe
   end
 end
