@@ -18,6 +18,7 @@ services:
     ports:
       - "80:80"
     volumes:
+      - ./public/:/etc/nginx/html/
       - ./nginx/:/etc/nginx/conf.d/
     stdin_open: true
     tty: true
