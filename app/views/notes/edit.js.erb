@@ -1,1 +1,2 @@
 $(".right-pane").html("<%= escape_javascript(render 'notes/editor', note: @note) %>");
+document.title = "<%= full_title(page_title: "編集") %>";
