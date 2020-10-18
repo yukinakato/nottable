@@ -3,7 +3,7 @@ name: Test and deploy
 on:
   push:
     branches:
-      - masterz
+      - master
     paths-ignore:
       - "README.md"
 
