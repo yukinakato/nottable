@@ -1,0 +1,391 @@
+@import "bootstrap/scss/bootstrap";
+@import "highlight.js/scss/github";
+
+blockquote {
+  color: #666666;
+  font-style: italic;
+  background-color: #f8f8f8;
+}
+
+// 共通
+.flash-fadeoutable {
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  z-index: 1;
+}
+.navbar {
+  background-color: #e3f2fd;
+  height: 60px;
+  border-bottom: 1px solid #dddddd;
+  .nav-link.with-image {
+    padding-top: 0;
+    padding-bottom: 0;
+    span {
+      vertical-align: middle;
+    }
+    &:after {
+      vertical-align: middle;
+    }
+  }
+}
+.notifications-count {
+  background-color: rgb(252, 98, 98);
+  color: white;
+  border-radius: 50%;
+  position: relative;
+  bottom: 2px;
+}
+.list-and-view {
+  height: calc(100vh - 60px);
+  display: flex;
+}
+.left-pane {
+  overflow: auto;
+  resize: horizontal;
+  min-width: 100px;
+  width: 160px;
+  border-right: 1px solid #cccccc;
+}
+.left-pane-tab {
+  width: 50%;
+  background-color: #f0f0f0;
+  box-shadow: 1px 1px 4px #aaaaaa;
+  .nav-link {
+    color: #aaaaaa;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.right-pane {
+  flex-grow: 1;
+  min-width: 10px;
+}
+.lets-start {
+  height: 100%;
+  .lets-start-icon {
+    font-size: 64px;
+    color: #555555;
+  }
+}
+.alert > ul {
+  margin: 0;
+}
+.tab-pane {
+  ul,
+  li {
+    list-style: none;
+    padding: 0;
+  }
+}
+.tab-content {
+  margin-top: 2px;
+}
+.tab-icon-description {
+  font-size: 9px;
+  margin: 0;
+}
+// リスト部
+.note-list-title {
+  text-decoration: none;
+  margin: 0px 6px;
+  border-bottom: 1px solid #d0d0d0;
+  overflow: hidden;
+  .note-list-link {
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #111111;
+    display: block;
+    &:hover {
+      color: black;
+      text-decoration: none;
+      background-color: #fff5e0;
+    }
+  }
+}
+// エディター共通の設定
+.note-edit-area {
+  padding: 20px;
+}
+.note-editor-part-area {
+  margin-bottom: 25px;
+  .note-editor-title {
+    font-size: 20px;
+  }
+}
+.markdown-field > textarea {
+  width: 100%;
+  min-height: 50px;
+  height: 250px;
+  border: 1px solid #cccccc;
+  padding: 8px;
+  &:focus {
+    border: 1px solid #aaaaaa;
+  }
+}
+.richtext-field > trix-editor {
+  min-height: 200px;
+}
+.help-pop {
+  display: inline;
+  position: relative;
+  &:hover .description-private {
+    display: inline-block;
+  }
+}
+.description-private {
+  display: none;
+  position: absolute;
+  left: 25px;
+  width: max-content;
+  font-size: 10px;
+  background-color: #666666;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+// ビューアー
+.note-content {
+  overflow: auto;
+  height: 100%;
+  padding: 18px 25px;
+}
+.note-author {
+  color: #888888;
+  font-size: 15px;
+}
+.note-author-link {
+  font-size: 16px;
+  color: black;
+  text-decoration: underline;
+  &:hover {
+    color: black;
+  }
+}
+.note-title-area {
+  font-size: 25px;
+  padding: 8px 0;
+  border-bottom: 1px solid #dddddd;
+}
+.note-title {
+  display: inline-block;
+}
+.note-private-icon {
+  color: rgb(220, 220, 0);
+  display: inline;
+  margin-right: 10px;
+  font-size: 24px;
+  filter: drop-shadow(1px 1px 0px #c9b98c);
+}
+.pdf-download-button {
+  color: #ee0000;
+  background-color: white;
+  border: none;
+  display: inline;
+  &:hover {
+    color: #ee0000;
+  }
+}
+.note-edit-icon {
+  color: black;
+  &:hover {
+    color: black;
+  }
+}
+.note-tool-icon {
+  margin-right: 30px;
+  font-size: 22px;
+  padding-left: 0;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.not-bookmarked,
+.bookmarked {
+  color: rgb(79, 148, 250);
+  background-color: #fff;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+.bookmark-form {
+  float: left;
+}
+.note-content-area {
+  // clear: left;
+  &.private-notice {
+    color: #555555;
+  }
+}
+.note-tool-area {
+  margin-bottom: 12px;
+  overflow: auto;
+  border-bottom: 1px solid #dddddd;
+  padding: 8px 0;
+}
+// 検索
+.search-info {
+  color: #888888;
+  font-size: 18px;
+}
+.search-who-index {
+  font-size: 18px;
+  padding: 10px 8px;
+  border-bottom: 3px solid rgb(86, 206, 82);
+}
+.search-icon {
+  position: relative;
+  right: 35px;
+  padding: 5px;
+  border: none;
+  background-color: white;
+  .fa-search {
+    font-size: 20px;
+    color: #aaaaaa;
+  }
+  display: flex;
+  .search-icon {
+    align-self: center;
+    position: relative;
+    right: 30px;
+  }
+}
+// プレビュー
+.note-preview {
+  padding: 10px 20px;
+  border: 1px solid #555555;
+  height: 240px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 10px #ccc;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: "";
+    top: 180px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(rgba(255, 255, 255, 0), white);
+  }
+}
+
+// PDF
+.pdf-note-title {
+  font-size: 32px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 20px;
+}
+
+// プロフィール
+.profile-area {
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+  .detail-area {
+    .user-name {
+      font-size: 28px;
+    }
+    .stop-follow {
+      background-color: #dddddd;
+    }
+  }
+}
+
+// ユーザー情報編集
+.delete-account-link {
+  float: right;
+}
+.account-settings-title {
+  font-size: 24px;
+}
+
+// 通知
+.notification {
+  display: flex;
+  border-top: 1px solid #dfdfdf;
+  padding: 8px;
+  .notification-image-link {
+    margin-right: 10px;
+  }
+  &.notification-unread {
+    background-color: #ffdeb6;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  .actor-link {
+    text-decoration: underline;
+    color: black;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+// フォロー管理画面
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  border: 1px solid #555555;
+  height: 120px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 10px #ccc;
+  position: relative;
+  .user-card-follow-form {
+    .stop-follow {
+      background-color: #dddddd;
+    }
+  }
+  .user-card-info {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    height: 80px;
+    .user-card-name {
+      font-size: 22px;
+    }
+  }
+}
+
+// ランディング
+.intro-and-login-form {
+  padding-top: 20px;
+}
+.app-introduction {
+  background-color: yellow;
+  height: 100%;
+}
+.guest-login-button {
+  background-color: rgb(255, 220, 62);
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+  padding: 12px;
+  display: block;
+  margin-bottom: 30px;
+  &:hover {
+    color: red;
+  }
+  &:focus {
+    background-color: rgb(252, 206, 0);
+  }
+}
+.sns-login-button {
+  color: white;
+  &:hover {
+    color: white;
+  }
+  &.facebook {
+    background-color: #4267b2;
+  }
+  &.twitter {
+    background-color: #1da1f2;
+  }
+}

@@ -1,0 +1,10 @@
+<% provide(:title, "フォロー管理") %>
+<div class="container mt-4">
+  <% if current_user.following.empty? %>
+    <%= render "users/following_empty" %>
+  <% else %>
+    <div class="notifications mb-4">
+      <%= render partial: "users/card", collection: @following, as: :user %>
+    </div>
+  <% end %>
+</div>

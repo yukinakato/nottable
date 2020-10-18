@@ -1,0 +1,13 @@
+<% provide(:title, "通知") %>
+<div class="container mt-4">
+  <% if current_user.notifications.empty? %>
+    <%= render "notifications/notification_empty" %>
+  <% else %>
+    <%= form_with url: notifications_path, method: :delete, local: true do |f| %>
+      <%= f.button "通知を削除", class: "btn btn-warning mb-4" %>
+    <% end %>
+    <div class="notifications mb-4">
+      <%= render @notifications %>
+    </div>
+  <% end %>
+</div>

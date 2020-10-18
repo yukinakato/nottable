@@ -1,0 +1,21 @@
+<div class="note-preview">
+  <div class="note-author-area">
+    <span class="note-author">作成者</span>
+    <%= link_to note.user.display_name, user_path(note.user), class: "note-author-link" %>
+  </div>
+  <div class="note-title-area">
+    <% if note.private %>
+      <div class="note-private-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+    <% end %>
+    <div class="note-title">
+      <%= link_to note.title, note_path(note) %>
+    </div>
+  </div>
+  <% if note.note_entity.is_a?(MarkdownNote) %>
+    <%= render_markdown(note.note_entity.content) %>
+  <% else %>
+    <%= note.note_entity.content %>
+  <% end %>
+</div>

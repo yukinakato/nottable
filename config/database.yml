@@ -51,5 +51,5 @@ test:
 production:
   <<: *default
   database: nottable_production
-  username: nottable
-  password: <%= ENV['NOTTABLE_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

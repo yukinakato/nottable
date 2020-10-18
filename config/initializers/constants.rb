@@ -1,0 +1,18 @@
+module Constants
+  SITE_NAME = "Nottable".freeze
+
+  USER_DISPLAY_NAME_MAX_LENGTH = 50
+  USER_INTRODUCE_MAX_LENGTH = 150
+
+  NOTE_TITLE_MAX_LENGTH = 50
+  NOTE_CONTENT_MAX_LENGTH = 1000
+
+  MODE_VIEWER = 0
+  MODE_BUILDER = 1
+  MODE_EDITOR = 2
+
+  GUEST_EMAIL = "guest@example.com"
+  GUEST_DISPLAY_NAME = "ゲストユーザー"
+end
+
+Constants.freeze

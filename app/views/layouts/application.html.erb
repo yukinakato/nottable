@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Nottable</title>
+    <title><%= full_title(page_title: yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%#= stylesheet_pack_tag 'application' %>
   </head>
-
   <body>
+    <%# console %>
+    <%= render 'layouts/header' %>
+    <%= render 'shared/flash' %>
     <%= yield %>
+    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'new_note' %>
   </body>
 </html>

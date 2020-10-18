@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= @note.title %></title>
+    <%= wicked_pdf_stylesheet_link_tag "application" -%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha512-yXniRKon3tdMGEPY6IC9lhMGqIl39xnxJxB3n3R/5v7k0yAZl/o/woYr6sgCNsb129tOFgkFlXdbYFIpoyJpVQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" integrity="sha512-FwY1WVsm4UQgrOXt6kaQ53w83cOHa8fSvjFn/BvVOCYVPmkSR39k/xnU+8hht3zW6JL1TBd4C/aVQIAV58Cg6A==" crossorigin="anonymous">
+  </head>
+  <body style="font-family: TakaoPGothic;">
+    <div class="pdf-note-title">
+      <%= @note.title %>
+    </div>
+    <div class="note-content-area">
+      <% if @note.note_entity.is_a?(MarkdownNote) %>
+        <%= render_markdown(@note.note_entity.content) %>
+      <% else %>
+        <%= @note.note_entity.content %>
+      <% end %>
+    </div>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

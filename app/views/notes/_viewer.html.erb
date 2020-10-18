@@ -1,0 +1,46 @@
+<div class="note-content">
+  <div class="note-author-area">
+    <span class="note-author">作成者</span>&nbsp;
+    <%= link_to note.user.display_name, user_path(note.user), class: "note-author-link" %>
+  </div>
+  <div class="note-title-area">
+    <% if note.private %>
+      <div class="note-private-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+    <% end %>
+    <div class="note-title">
+      <%= note.title %>
+    </div>
+  </div>
+  <% if current_user.prohibited?(note) %>
+    <div class="note-tool-area">
+      <%= render 'bookmarks/bookmark_form', note: note %>
+    </div>
+    <div class="note-content-area private-notice">
+      このノートはプライベートに設定されました。
+      ノートの作成者がプライベートを解除すると内容を見られるようになります。
+    </div>
+  <% else %>
+    <div class="note-tool-area">
+      <%= render 'bookmarks/bookmark_form', note: note %>
+      <% if current_user == note.user %>
+        <%= link_to edit_note_path(note), class: "note-edit-icon note-tool-icon", remote: true do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+      <% end %>
+      <%= link_to create_pdf_path(note), target: "_blank", rel: "noopener noreferrer" do %>
+        <div class="pdf-download-button note-tool-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+      <% end %>
+    </div>
+    <div class="note-content-area">
+      <% if note.note_entity.is_a?(MarkdownNote) %>
+        <%= render_markdown(note.note_entity.content) %>
+      <% else %>
+        <%= note.note_entity.content %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

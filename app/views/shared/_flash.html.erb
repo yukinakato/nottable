@@ -1,0 +1,4 @@
+<% flash.each do |message_type, message| %>
+  <%= content_tag(:div, message, class: "flash-fadeoutable alert alert-#{bootstrap_alert message_type}") %>
+<% end %>
+<%= javascript_pack_tag 'flash_fadeout' %>
