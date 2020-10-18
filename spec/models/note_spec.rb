@@ -112,7 +112,7 @@ RSpec.describe Note, type: :model do
     let!(:note_2) { create(:note, note_entity: markdown_2) }
     let!(:note_3) { create(:note, note_entity: markdown_3) }
 
-    context "空のとき" do
+    context "nil のとき" do
       let(:keyword) { nil }
 
       it { is_expected.to contain_exactly(note_1, note_2, note_3) }
