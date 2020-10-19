@@ -15,6 +15,6 @@ class UsersController < ApplicationController
   end
 
   def following
-    @following = current_user.following.includes(:avatar_attachment)
+    @following = current_user.following.includes(avatar_attachment: :blob)
   end
 end
