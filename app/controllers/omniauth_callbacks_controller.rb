@@ -10,7 +10,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:success] = "Facebookでログインしました。"
       sign_in_and_redirect @user
     else
-      flash[:warning] = "ユーザー登録に失敗しました。メールアドレスの取得に失敗した可能性があります。"
+      flash[:warning] = "ユーザー登録に失敗しました。メールアドレスの取得に失敗したか、すでにこのメールアドレスのユーザーが登録済みの可能性があります。"
       redirect_to root_path
     end
   end
