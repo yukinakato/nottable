@@ -157,7 +157,7 @@ EOS
 
 u1.notifications.create(notify_entity: n)
 
-n = create_markdown_note(u2, "ランニングはじめました", <<~'EOS'
+n = create_markdown_note(u2, "ランニング始めました", <<~'EOS'
 最近、ランニングをはじめました！仕事の後、１時間ほど家の近所を走っています。
 
 終わった後のシャワーが最高なんですよね。
