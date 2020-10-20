@@ -1,24 +1,39 @@
-# README
+# Nottable（ノッタブル）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ノートを作成・公開し、フォローしあえるサービス。
 
-Things you may want to cover:
+https://nottable.work/
 
-* Ruby version
+## 特徴
+* マークダウン記法や Action Text を用いた表現力豊かなノートを作成できる
+* PDF ダウンロード機能によってノートをオフラインで持ち運べる
+* 他人から内容が見えないプライベートノートを作成できる
+* フォローした人がノートを作成すると通知を受け取れる
+* Facebook ログインに対応し、Facebook アカウントを持っていればすぐに利用を開始できる
 
-* System dependencies
+## 想定する利用形態
 
-* Configuration
+* 業務チームでの利用
+  * ナレッジを蓄積・共有することにより、仕事や情報伝達の効率化が望める
+  * 重要な告知をする社員のアカウントをフォローして通知を受け取り、情報を逃さずキャッチできる
+* サークル・コミュニティでの利用
+  * 各メンバーが活動のアイデアを書き出すことで、新たな活動やコラボレーションのきっかけ作りができる
+  * 講義内容のメモ等を共有し、学習に役立てることができる
+* 個人での利用
+  * ノートテイクアプリとして情報を整理できる
 
-* Database creation
+## 開発した理由
 
-* Database initialization
+* 情報を整理し、アクセスしやすくすることに価値を感じるから
+* ノートテイクアプリに SNS の機能要素を組み合わせることにより生まれる価値や、どのような使い心地になるのか興味があったから
+* サーバーサイドでのマークダウンレンダリングや PDF 生成、Action Text といった使ったことのない技術に挑戦したかったから
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 主な使用技術
+* Ruby 2.6.6
+* Ruby on Rails 6.0.3.3
+* RSpec
+* MySQL
+* nginx / Let's Encrypt
+* AWS Lightsail / S3
+* GitHub Actions
+* Docker Compose (開発用環境)
