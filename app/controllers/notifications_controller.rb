@@ -3,7 +3,8 @@ class NotificationsController < ApplicationController
   after_action :mark_read_all, only: :show
 
   def show
-    @notifications = current_user.notifications.includes(notify_entity: [user: :avatar_attachment]).latest
+    @notifications = current_user.notifications.
+      includes(notify_entity: { user: [avatar_attachment: :blob], follower: [avatar_attachment: :blob] }).latest
   end
 
   def destroy

@@ -3,13 +3,43 @@
 <% else %>
   <div class="container">
     <div class="row intro-and-login-form">
-      <div class="col-6">
+      <div class="col-5 offset-1">
         <div class="app-introduction">
-          アプリ紹介
+          <p class="mb-4">記録してつながる、ノート作成アプリ</p>
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= image_tag "app_feat_com.svg", class: "app-introduction-image" %>
+              </div>
+              <div class="carousel-item">
+                <%= image_tag "app_feat_note.svg", class: "app-introduction-image" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 offset-1">
+        <%= render 'devise/sessions/login_form' %>
+      </div>
+    </div>
+    <div class="row app-features">
+      <div class="col-4">
+        <div class="app-feature feat-01">
+          <%= image_tag "app_feat_md.png", class: "app-feat-image mb-2" %>
+          <p>マークダウン形式にも対応した、表現力豊かなノートを作成できます。ノートは PDF 形式でダウンロードすることもできます。</p>
         </div>
       </div>
       <div class="col-4">
-        <%= render 'devise/sessions/login_form' %>
+        <div class="app-feature feat-02">
+          <%= image_tag "app_feat_notification.svg", class: "app-feat-image mb-2" %>
+          <p>興味のある投稿をする人をフォローして、通知を受け取りましょう。見逃す心配はもういりません。</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="app-feature feat-03">
+          <%= image_tag "app_feat_private.svg", class: "app-feat-image mb-2" %>
+          <p>他の人に見られたくないノートは、プライベートにすることができます。設定はいつでも変更できます。</p>
+        </div>
       </div>
     </div>
   </div>

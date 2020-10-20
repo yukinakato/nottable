@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
 
     it "unread_notifications_length メソッド" do
-      expect { create(:notification, :for_follow, user: user) }.to change(user, :unread_notifications_length).from(0).to(1)
+      expect { create(:notification, :for_follow, user: user) }.to change { user.reload.unread_notifications_length }.from(0).to(1)
     end
 
     it "mark_notifications_read_all メソッド" do

@@ -1,2 +1,2 @@
 $('#bookmark-note-id-<%= @note.id %>').html("<%= escape_javascript render('bookmarks/bookmark', note: @note) %>");
-$("#bookmarks > #note-id-<%= @note.id %>").remove();
+$("#bookmarks > .note-id-<%= @note.id %>").remove();
