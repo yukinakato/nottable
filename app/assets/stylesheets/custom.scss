@@ -10,8 +10,8 @@ blockquote {
 // 共通
 .flash-fadeoutable {
   position: absolute;
-  width: 50%;
-  left: 25%;
+  width: 40%;
+  left: 30%;
   text-align: center;
   z-index: 1;
 }
@@ -357,10 +357,31 @@ blockquote {
 // ランディング
 .intro-and-login-form {
   padding-top: 20px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #dcdcdc;
 }
 .app-introduction {
-  background-color: yellow;
-  height: 100%;
+  height: calc(100% - 20px);
+  font-size: 24px;
+  color: #111111;
+  .app-introduction-image {
+    width: 80%;
+  }
+}
+.app-features {
+  padding-top: 30px;
+  .app-feature {
+    display: flex;
+    flex-direction: column;
+    padding-left: 35px;
+    padding-right: 35px;
+    color: #333333;
+    font-size: 15px;
+    .app-feat-image {
+      height: 115px;
+      align-self: center;
+    }
+  }
 }
 .guest-login-button {
   background-color: rgb(255, 220, 62);
