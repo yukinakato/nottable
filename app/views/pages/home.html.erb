@@ -5,8 +5,17 @@
     <div class="row intro-and-login-form">
       <div class="col-5 offset-1">
         <div class="app-introduction">
-          <p class="mb-4">記録してつながる、Nottable</p>
-          <%= image_tag "app_feat_note.svg", class: "app-introduction-image" %>
+          <p class="mb-4">記録してつながる、ノート作成アプリ</p>
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= image_tag "app_feat_com.svg", class: "app-introduction-image" %>
+              </div>
+              <div class="carousel-item">
+                <%= image_tag "app_feat_note.svg", class: "app-introduction-image" %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-4 offset-1">

@@ -359,13 +359,14 @@ blockquote {
   padding-top: 20px;
   padding-bottom: 25px;
   border-bottom: 1px solid #dcdcdc;
+  height: fit-content;
 }
 .app-introduction {
   height: calc(100% - 20px);
   font-size: 24px;
   color: #111111;
   .app-introduction-image {
-    width: 100%;
+    max-width: 95%;
   }
 }
 .app-features {
@@ -385,6 +386,7 @@ blockquote {
 }
 .guest-login-button {
   background-color: rgb(255, 220, 62);
+  border: 1px solid rgb(245, 179, 103);
   font-size: 18px;
   font-weight: bold;
   color: red;
