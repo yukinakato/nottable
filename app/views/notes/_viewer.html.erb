@@ -1,5 +1,6 @@
 <div class="note-content">
   <div class="note-author-area">
+    <%= get_user_avatar(note.user, size: 35) %>
     <span class="note-author">作成者</span>&nbsp;
     <%= link_to note.user.display_name, user_path(note.user), class: "note-author-link" %>
   </div>
