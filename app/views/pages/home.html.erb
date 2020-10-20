@@ -3,13 +3,13 @@
 <% else %>
   <div class="container">
     <div class="row intro-and-login-form">
-      <div class="col-6">
+      <div class="col-5 offset-1">
         <div class="app-introduction">
           <p class="mb-4">記録してつながる、Nottable</p>
           <%= image_tag "app_feat_note.svg", class: "app-introduction-image" %>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-4 offset-1">
         <%= render 'devise/sessions/login_form' %>
       </div>
     </div>
