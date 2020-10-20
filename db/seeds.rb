@@ -101,6 +101,8 @@ EOS
 
 create_markdown_note(u1, "注意事項", <<~'EOS'
 本サービスは試験運用中のため、予告なくデータベースがリセットされることがあります。予めご了承下さい。
+
+![cat](https://nottable.work/img/cat.png)
 EOS
 )
 
